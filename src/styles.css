@@ -410,6 +410,8 @@ code {
 .lesson-copy h3 { font-size: 13px; margin: 20px 0 9px; }
 .lesson-copy h3:first-child { margin-top: 0; }
 .lesson-copy p { font-size: 12px; line-height: 1.95; color: #6e6a5e; margin: 0 0 10px; }
+.lesson-copy--after { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+.lesson-copy-head { margin-bottom: 12px; }
 .note-pills { display: flex; flex-wrap: wrap; gap: 7px; margin: 13px 0; }
 .note-pill {
   display: inline-flex; align-items: center; justify-content: center;

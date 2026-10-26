@@ -48,11 +48,11 @@ export const LESSONS = Object.freeze([
     demo: { label: '两个一组的黑键', notes: [61, 63] },
     task: {
       mode: 'sequence',
-      prompt: '依次按下两个一组的黑键（C♯4、D♯4），再按下三个一组的三个黑键（F♯4、G♯4、A♯4）。',
-      target: [61, 63, 66, 68, 70],
-      labels: ['C♯4', 'D♯4', 'F♯4', 'G♯4', 'A♯4']
+      prompt: '找到任意「两个一组」的黑键，依次按下这两个黑键（C♯4、D♯4）。',
+      target: [61, 63],
+      labels: ['C♯4', 'D♯4']
     },
-    passCriteria: '按正确顺序弹完 5 个黑键，允许中途弹错后重新开始。',
+    passCriteria: '依次按对这两个黑键，就完成了你的第一课。',
     completion: '完成后，你已经在琴键上验证了黑键的分组规律。',
     reviewTip: '隔天再随机找三个不同的 C，并说出它右侧黑键的分组。'
   },

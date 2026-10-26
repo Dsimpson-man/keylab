@@ -195,15 +195,6 @@ export function renderLessonPage(state) {
     </div>
     <div class="lesson-detail">
       <section class="lesson-main-card">
-        <div class="lesson-copy">
-          ${lesson.sections.map(section => `<h3>${escapeHtml(section.title)}</h3><p>${escapeHtml(section.text)}</p>`).join('')}
-          <div class="note-pills">${joinPills(lesson.examples)}</div>
-          ${demoNotes.length ? `<div class="demo-row">
-            <button class="btn btn-ghost btn-small" data-action="play-demo" data-notes="${demoNotes.join(',')}" data-label="${escapeHtml(lesson.demo.label || '示范')}">试听示范 ♪</button>
-            <span>${escapeHtml(lesson.demo.label || '')} · ${demoNotes.map(note => escapeHtml(noteName(note, { naming: naming(state) }))).join(' · ')}</span>
-          </div>` : ''}
-          <div class="lesson-tip"><strong>小提示：</strong>${escapeHtml(lesson.tip)}</div>
-        </div>
         <div class="exercise-box ${state.lessonStatus?.complete ? 'is-complete' : ''}" id="lesson-exercise" data-mode="${lesson.task.mode}">
           <span class="exercise-kicker">TRY IT YOURSELF · 练一练</span>
           <h3>${escapeHtml(lesson.task.prompt)}</h3>
@@ -237,6 +228,16 @@ export function renderLessonPage(state) {
           title: '互动虚拟键盘 · 37 键',
           subtitle: '屏幕琴键、电脑键盘（A–L / W E T Y U，Z X 移八度）或实体 MIDI'
         })}
+        <div class="lesson-copy lesson-copy--after">
+          <div class="lesson-copy-head"><span class="tag">为什么？</span></div>
+          ${lesson.sections.map(section => `<h3>${escapeHtml(section.title)}</h3><p>${escapeHtml(section.text)}</p>`).join('')}
+          <div class="note-pills">${joinPills(lesson.examples)}</div>
+          ${demoNotes.length ? `<div class="demo-row">
+            <button class="btn btn-ghost btn-small" data-action="play-demo" data-notes="${demoNotes.join(',')}" data-label="${escapeHtml(lesson.demo.label || '示范')}">试听示范 ♪</button>
+            <span>${escapeHtml(lesson.demo.label || '')} · ${demoNotes.map(note => escapeHtml(noteName(note, { naming: naming(state) }))).join(' · ')}</span>
+          </div>` : ''}
+          <div class="lesson-tip"><strong>小提示：</strong>${escapeHtml(lesson.tip)}</div>
+        </div>
       </section>
       <aside class="lesson-side-card">
         <span class="tag">LESSON MAP</span>

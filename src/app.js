@@ -49,6 +49,7 @@ const state = {
   quizMatcher: null,
   quizFeedback: null,
   earSession: null,
+  practiceMode: false,
   activeModule: null,
   lab: { filter: 'all', paused: false, expanded: new Set(), learnTarget: null },
   labMetronome: { running: false, beat: 0 }
@@ -234,6 +235,7 @@ function openLesson(id, { pushHash = true } = {}) {
   state.lessonId = lesson.id;
   state.lessonEngine = createLessonEngine({
     lesson,
+    forgiving: state.practiceMode,
     onStatusChange: status => {
       state.lessonStatus = status;
       updateLessonUI();
@@ -302,6 +304,7 @@ function renderLessonActions() {
   box.innerHTML = `
     ${complete ? `<span class="exercise-done">✓ 练习已通过${done ? ' · 进度已保存' : ''}</span>` : ''}
     <button class="btn btn-dark-ghost btn-small" data-action="reset-lesson">${complete ? '再练一次 ↻' : '重新开始 ↻'}</button>
+    <button class="btn btn-dark-ghost btn-small" data-action="toggle-practice-mode">${state.practiceMode ? '练习模式：开 ✓' : '练习模式'}</button>
     ${complete && next ? `<button class="btn btn-primary btn-small" data-action="next-lesson" data-id="${next.id}">下一课 →</button>` : ''}
     ${complete && !next ? `<button class="btn btn-primary btn-small" data-view="courses">返回课程列表 →</button>` : ''}`;
 }
@@ -982,6 +985,14 @@ async function handleAction(button) {
       stopRhythm();
       render();
       break;
+    case 'toggle-practice-mode': {
+      state.practiceMode = !state.practiceMode;
+      const lesson = findLesson(state.lessonId);
+      if (lesson) openLesson(lesson.id, { pushHash: false });
+      else render();
+      showToast(state.practiceMode ? '练习模式已开启：弹错不会从头开始，慢慢来。' : '练习模式已关闭。', { tone: 'success' });
+      break;
+    }
     case 'start-quiz':
       startQuiz(button.dataset.category || 'all');
       break;

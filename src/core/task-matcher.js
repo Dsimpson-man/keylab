@@ -22,13 +22,15 @@ const STATUS = Object.freeze({
   COMPLETE: 'complete'
 });
 
-export function createTaskMatcher(task, { naming = 'standard' } = {}) {
+export function createTaskMatcher(task, { naming = 'standard', forgiving = false } = {}) {
   const target = Array.isArray(task?.target) ? task.target.slice() : [];
   const mode = task?.mode || 'sequence';
   if (!target.length) throw new Error('任务必须包含至少一个目标音');
   if (mode === 'together' && new Set(target).size !== target.length) {
     throw new Error('together 任务的目标音不能重复');
   }
+  // 练习模式（forgiving）：sequence/staff 弹错不重置，只提示并保持在当前位置。
+  const isForgiving = forgiving && (mode === 'sequence' || mode === 'staff');
 
   let index = 0;
   let complete = false;
@@ -108,8 +110,8 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
     const relation = describeRelation(expected, note, { naming });
     const errorText = describePitchError(note, expected, { naming });
     const hint = friendlyPitchHint(note, expected, { naming });
-    if (mode === 'wait') {
-      // 曲目练习：弹错只提示实际音与目标音的关系，不重置进度，等弹对当前音再前进。
+    if (mode === 'wait' || isForgiving) {
+      // 曲目练习 / 练习模式：弹错只提示实际音与目标音的关系，不重置进度，等弹对当前音再前进。
       feedback = `${hint} 保持当前位置，继续弹 ${noteName(expected, { naming })}。`;
       return { status: STATUS.WRONG, feedback, index, total: target.length, complete: false, relation };
     }

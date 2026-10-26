@@ -11,12 +11,12 @@ import { EVENT_TYPES } from '../midi/midi-normalizer.js';
 import { analyzePractice } from './practice-report.js';
 import { melodyNotesWithBeats, buildNoteGrid, analyzePieceRhythm } from './piece-rhythm.js';
 
-export function createLessonEngine({ lesson, onStatusChange = () => {} } = {}) {
+export function createLessonEngine({ lesson, onStatusChange = () => {}, forgiving = false } = {}) {
   if (!lesson) throw new Error('缺少课程数据');
   if (lesson.task.mode === 'rhythm') {
     return createRhythmLessonEngine({ lesson, onStatusChange });
   }
-  const matcher = createTaskMatcher(lesson.task);
+  const matcher = createTaskMatcher(lesson.task, { forgiving });
   // 记录正确按键（note / velocity / timestamp），用于完成时生成练习报告。
   let correctRecords = [];
   let status = {
