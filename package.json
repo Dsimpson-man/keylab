@@ -1,0 +1,17 @@
+{
+  "name": "keylab",
+  "version": "0.2.0-beta",
+  "private": true,
+  "type": "module",
+  "description": "KeyLab：中文优先、免费开源、移动端优先的互动音乐与 MIDI 学习网站。",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "serve": "python -m http.server 4173",
+    "check": "node --check src/app.js && node --test",
+    "test": "node --test",
+    "test:watch": "node --test --watch"
+  }
+}
