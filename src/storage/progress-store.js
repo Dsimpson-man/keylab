@@ -30,6 +30,7 @@ export function defaultProgress() {
     practiceNotes: 0,
     practiceSessions: 0,
     earStats: { answered: 0, correct: 0 },
+    earSrs: {},
     pieceStats: {},
     activityDays: [],
     lastActiveDate: null,
@@ -73,6 +74,7 @@ export function normalizeProgress(input) {
     earStats: isPlainObject(input.earStats)
       ? { answered: toFiniteInt(input.earStats.answered), correct: toFiniteInt(input.earStats.correct) }
       : { answered: 0, correct: 0 },
+    earSrs: isPlainObject(input.earSrs) ? { ...input.earSrs } : {},
     pieceStats: isPlainObject(input.pieceStats) ? { ...input.pieceStats } : {},
     activityDays: uniqueStrings(input.activityDays).sort(),
     lastActiveDate: typeof input.lastActiveDate === 'string' ? input.lastActiveDate : null,

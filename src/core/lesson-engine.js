@@ -10,6 +10,7 @@ import { createTaskMatcher, MATCH_STATUS } from './task-matcher.js';
 import { EVENT_TYPES } from '../midi/midi-normalizer.js';
 import { analyzePractice } from './practice-report.js';
 import { melodyNotesWithBeats, buildNoteGrid, analyzePieceRhythm } from './piece-rhythm.js';
+import { weakestMeasures } from './piece-weakness.js';
 
 export function createLessonEngine({ lesson, onStatusChange = () => {}, forgiving = false } = {}) {
   if (!lesson) throw new Error('缺少课程数据');
@@ -72,6 +73,15 @@ export function createLessonEngine({ lesson, onStatusChange = () => {}, forgivin
       const offsetMs = firstRecord.timestamp - grid[0].startMs;
       return analyzePieceRhythm(correctRecords, grid, { toleranceMs: 300, offsetMs });
     },
+    get weakMeasures() {
+      // 逐小节薄弱定位：找出命中率最低、误差最大的小节，供结束报告循环重练。
+      if (!lesson.measures || !correctRecords.length) return [];
+      const rhythm = this.pieceRhythmReport;
+      if (!rhythm || !rhythm.entries) return [];
+      const totalNotes = melodyNotesWithBeats(lesson.measures).length;
+      const hits = rhythm.entries.filter(e => e.onTime).map((e, i) => ({ index: i, errorMs: e.errorMs }));
+      return weakestMeasures(lesson.measures, hits, totalNotes, 3);
+    },
     handleEvent(event) {
       if (!event || !Number.isInteger(event.note)) return status;
       if (event.type !== EVENT_TYPES.NOTE_ON && event.type !== EVENT_TYPES.NOTE_OFF) return status;
@@ -94,6 +104,7 @@ export function createLessonEngine({ lesson, onStatusChange = () => {}, forgivin
         if (event.type === EVENT_TYPES.NOTE_ON && result.index === result.total) recordCorrect(event);
         next.practiceReport = this.practiceReport;
         next.pieceRhythmReport = this.pieceRhythmReport;
+        next.weakMeasures = this.weakMeasures;
       }
       return emit(next);
     },

@@ -35,10 +35,12 @@ import { $, $$, escapeHtml, downloadFile, timestampForFilename } from './ui/form
 import { renderHome, renderCourses, renderLessonPage, renderPractice, renderEar, renderMidiLab, renderProgress, renderEventList, renderHeldList, renderDeviceChecklist, renderImportPreview, renderStorageInfo, viewMeta } from './ui/views.js';
 import { makeIntervalEarQuestion, makeChordEarQuestion, makeMelodyEarQuestion, judgeEar, earQuestionNotes } from './core/ear-engine.js';
 import { recordPieceRun } from './core/piece-mastery.js';
+import { reviewCard, dueCards } from './core/srs.js';
 import { KeyboardController } from './ui/keyboard.js';
+import { createFallView } from './ui/fall-view.js';
 import { showToast, openModal, confirmDialog, closeModal, initModalBindings } from './ui/notify.js';
 
-const APP_VERSION = '0.4.0-beta';
+const APP_VERSION = '0.5.0-beta';
 
 const state = {
   currentView: 'home',
@@ -50,6 +52,7 @@ const state = {
   quizFeedback: null,
   earSession: null,
   difficulty: 'bronze', // bronze(练习，弹错不重置) | silver(标准) | gold(挑战，一次通过)
+  fallView: null,
   activeModule: null,
   lab: { filter: 'all', paused: false, expanded: new Set(), learnTarget: null },
   labMetronome: { running: false, beat: 0 }
@@ -201,7 +204,11 @@ function navigate(view, { pushHash = true } = {}) {
   if (view !== 'ear') {
     state.earSession = null;
   }
-  if (view !== 'lesson' && state.currentView === 'lesson') stopRhythm();
+  if (view !== 'lesson' && state.currentView === 'lesson') {
+    stopRhythm();
+    state.fallView?.stop?.();
+    state.fallView = null;
+  }
   if (view !== 'midi') {
     // 离开实验室时停止映射监听，避免在其他页面误捕获 CC。
     state.lab.learnTarget = null;
@@ -403,6 +410,7 @@ bus.on('note:on', event => {
     ? true
     : progress.settings.monitorHardwareSound;
   if (shouldSound) audio.noteOn(event.note, event.velocity || 90, { source: event.source });
+  if (state.fallView) state.fallView.press(event.note);
   routeNoteEvent(event);
 });
 
@@ -770,11 +778,30 @@ function startEar(earType = 'mixed') {
   const count = 6;
   const questions = [];
   const rootNotes = [60, 62, 64, 65, 67, 69]; // C4 到 A4 的白键，听辨范围
+  // SRS：混合模式下，到期卡片对应的题型优先出现（复习优先于随机）。
+  const dueTypes = new Set();
+  if (earType === 'mixed') {
+    const due = dueCards(Object.values(progress.earSrs || {}));
+    for (const card of due) {
+      const type = String(card.id).split('-')[0];
+      if (['interval', 'chord', 'melody'].includes(type)) dueTypes.add(type);
+    }
+  }
+  const typeQueue = [];
+  for (const t of dueTypes) typeQueue.push(t);
+  let dueIndex = 0;
   for (let i = 0; i < count; i += 1) {
     const root = rootNotes[i % rootNotes.length];
-    const type = earType === 'mixed'
-      ? ['interval', 'chord', 'melody'][i % 3]
-      : earType;
+    let type = earType;
+    if (earType === 'mixed') {
+      // 前几个优先到期类型，之后回到 3 类轮换。
+      if (dueIndex < typeQueue.length) {
+        type = typeQueue[dueIndex];
+        dueIndex += 1;
+      } else {
+        type = ['interval', 'chord', 'melody'][(i - dueTypes.size) % 3];
+      }
+    }
     if (type === 'interval') questions.push(makeIntervalEarQuestion(root));
     else if (type === 'chord') questions.push(makeChordEarQuestion(root));
     else questions.push(makeMelodyEarQuestion(root));
@@ -833,6 +860,9 @@ function handleEarAnswer(index) {
   progress.earStats = progress.earStats || { answered: 0, correct: 0 };
   progress.earStats.answered += 1;
   if (result.correct) progress.earStats.correct += 1;
+  // SRS 间隔重复：按题型记录卡片，答对间隔递增、答错回退，到期优先复习。
+  const cardId = question.cardId || `${question.type}-${question.answer}`;
+  progress.earSrs[cardId] = reviewCard(progress.earSrs[cardId], result.correct);
   recordActivity();
   persistNow();
   render();
@@ -1066,6 +1096,9 @@ async function handleAction(button) {
     case 'play-demo':
       playDemo(button.dataset.notes, button.dataset.label);
       break;
+    case 'start-fall':
+      startFallView();
+      break;
     case 'toggle-lesson-metronome':
       await toggleLessonMetronome();
       break;
@@ -1221,6 +1254,27 @@ function playDemo(notesText, label) {
     }, index * spacing);
     demoTimers.push(timer);
   });
+}
+
+/** 启动瀑布流跟弹：音符下落，到击打线时按对应的键。 */
+function startFallView() {
+  const host = $('#fall-host');
+  const lesson = findLesson(state.lessonId);
+  if (!host || !lesson || !lesson.measures) return;
+  state.fallView?.stop?.();
+  state.fallView = createFallView({
+    host,
+    measures: lesson.measures,
+    bpm: lesson.task.tempo || 80,
+    onHit: (note, result) => {
+      if (result.hit) showToast(`命中 ${noteName(note, { naming: progress.settings.naming })}${result.late ? '（偏晚）' : result.early ? '（偏早）' : ''}`, { tone: 'success', duration: 800 });
+    },
+    onComplete: summary => {
+      showToast(`跟弹完成：命中率 ${summary.accuracyPercent}%，平均偏差 ${summary.meanAbsErrorMs ?? '—'} 毫秒。`, { tone: 'success', duration: 4000 });
+    }
+  });
+  state.fallView.start();
+  showToast('瀑布流开始：音符落下，到击打线时按对应的键。', { duration: 2500 });
 }
 
 // ---------------------------------------------------------------- Service Worker

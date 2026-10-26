@@ -10,6 +10,7 @@ import { QUIZ_CATEGORIES, QUESTIONS, questionsForCategory, findQuestion } from '
 import { noteName } from '../core/music-theory.js';
 import { describePractice } from '../core/practice-report.js';
 import { describePieceRhythm } from '../core/piece-rhythm.js';
+import { describeWeakMeasures } from '../core/piece-weakness.js';
 import { earQuestionNotes } from '../core/ear-engine.js';
 import { masteryLevel, masteryLabel } from '../core/piece-mastery.js';
 import { localDateKey, calculateStreak, quizAccuracy } from '../storage/progress-store.js';
@@ -229,6 +230,7 @@ export function renderLessonPage(state) {
           <div class="exercise-feedback" id="lesson-exercise-feedback" data-tone="${state.lessonStatus?.complete ? 'success' : 'default'}" role="status" aria-live="polite">${escapeHtml(state.lessonStatus?.feedback || (isRhythm ? '点击「开始节拍器」，听预备拍后开始演奏。' : '准备好后，按提示弹奏第一个音。'))}</div>
           ${state.lessonStatus?.practiceReport ? `<div class="practice-report" role="status">${escapeHtml(describePractice(state.lessonStatus.practiceReport))}</div>` : ''}
           ${state.lessonStatus?.pieceRhythmReport ? `<div class="practice-report practice-report--rhythm" role="status">${escapeHtml(describePieceRhythm(state.lessonStatus.pieceRhythmReport.summary, 300))}</div>` : ''}
+          ${state.lessonStatus?.weakMeasures?.length ? `<div class="practice-report practice-report--weak" role="status">🎯 薄弱小节：${escapeHtml(describeWeakMeasures(state.lessonStatus.weakMeasures))}，可以循环重练这几小节。</div>` : ''}
           <div class="rhythm-area" id="lesson-rhythm-area" ${isRhythm ? '' : 'hidden'}>
             <div class="rhythm-controls">
               <button class="btn btn-primary btn-small" data-action="toggle-lesson-metronome" id="lesson-metronome-button">开始节拍器 ▶</button>
@@ -242,6 +244,11 @@ export function renderLessonPage(state) {
         </div>
         ${isStaff ? `<div class="staff-block">${renderStaff(lesson.task.target, { title: '本课谱面', showLabels: true })}<p class="staff-note">这是教学用简化的高音谱表。实际乐谱还会有调号、拍号与更复杂的节奏。</p></div>` : ''}
         ${lesson.measures ? `<div class="staff-block">${renderMeasures(lesson.measures, { clef: lesson.clef || 'G', timeSignature: lesson.timeSignature || [4, 4], title: `${lesson.title} · 完整乐谱`, showLabels: true })}</div>` : ''}
+        ${lesson.module === 'H' ? `<div class="fall-block">
+          <div class="fall-head"><strong>瀑布流跟弹</strong><span>音符落下，到击打线时按对应的键</span></div>
+          <div class="fall-host" id="fall-host"></div>
+          <div class="button-row" style="margin-top:10px"><button class="btn btn-primary btn-small" data-action="start-fall">开始跟弹 ▶</button></div>
+        </div>` : ''}
         ${renderPianoPanel({
           start: 48,
           count: 37,

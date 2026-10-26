@@ -48,6 +48,8 @@ export function makeIntervalEarQuestion(rootNote = 60, random = Math.random) {
     targetNote: rootNote + picked.semitones,
     answer: options.indexOf(picked.label),
     options,
+    // SRS 复习标识：同一「音程」是一张卡片（不管根音）。
+    cardId: `interval-${picked.label}`,
     explanation: `从根音向上 ${picked.semitones} 个半音是${picked.label}。`
   };
 }
@@ -64,6 +66,8 @@ export function makeChordEarQuestion(rootNote = 60, random = Math.random) {
     notes: picked.steps.map(step => rootNote + step),
     answer: options.indexOf(picked.name),
     options,
+    // SRS 复习标识：同一「和弦类型」是一张卡片。
+    cardId: `chord-${picked.name}`,
     explanation: `${picked.name}（${picked.label}）由根音向上 ${picked.steps[1]}、${picked.steps[2]} 个半音的三个音组成。`
   };
 }
@@ -85,6 +89,8 @@ export function makeMelodyEarQuestion(rootNote = 60, random = Math.random) {
     notes,
     answer: direction === 'up' ? 0 : 1,
     options: ['上行', '下行'],
+    // SRS 复习标识：同一「走向」是一张卡片。
+    cardId: direction === 'up' ? 'melody-up' : 'melody-down',
     explanation: direction === 'up' ? '旋律音高逐渐升高，是上行。' : '旋律音高逐渐降低，是下行。'
   };
 }

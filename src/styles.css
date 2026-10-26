@@ -445,6 +445,7 @@ code {
   background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14);
   font-size: 10px; line-height: 1.8; color: #e6e1d3;
 }
+.practice-report--weak { background: rgba(244, 227, 181, .12); border-color: rgba(244, 227, 181, .25); color: #f4e3b5; }
 .exercise-feedback[data-tone="warn"] { color: #ffd4b8; }
 .exercise-actions { margin-top: 14px; align-items: center; }
 .exercise-done { font-size: 11px; font-weight: 700; color: var(--mint); }
@@ -469,6 +470,12 @@ code {
 .rhythm-error { text-align: right; }
 
 .staff-block { margin-top: 18px; padding: 14px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+.fall-block { margin-top: 18px; padding: 14px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+.fall-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.fall-head strong { font-size: 12px; }
+.fall-head span { font-size: 10px; color: var(--muted); }
+.fall-host { width: 100%; min-height: 280px; border-radius: 10px; background: #2b2923; overflow: hidden; }
+.fall-host canvas { display: block; }
 .staff-figure { margin: 0; }
 .staff-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .staff-figure--vex svg { display: block; height: auto; }

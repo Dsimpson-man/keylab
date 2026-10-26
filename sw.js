@@ -1,4 +1,4 @@
-const CACHE_NAME = 'keylab-static-v6';
+const CACHE_NAME = 'keylab-static-v7';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -11,12 +11,15 @@ const CORE_ASSETS = [
   './src/core/event-bus.js',
   './src/core/lesson-engine.js',
   './src/core/music-theory.js',
+  './src/core/piece-fall.js',
   './src/core/piece-mastery.js',
   './src/core/piece-rhythm.js',
+  './src/core/piece-weakness.js',
   './src/core/practice-report.js',
   './src/core/quiz-engine.js',
   './src/core/rhythm-analyzer.js',
   './src/core/rhythm-session.js',
+  './src/core/srs.js',
   './src/core/task-matcher.js',
   './src/data/lessons.js',
   './src/data/quizzes.js',
@@ -29,6 +32,7 @@ const CORE_ASSETS = [
   './src/midi/simulated-midi-adapter.js',
   './src/midi/web-midi-adapter.js',
   './src/storage/progress-store.js',
+  './src/ui/fall-view.js',
   './src/ui/format.js',
   './src/ui/keyboard.js',
   './src/ui/notify.js',
