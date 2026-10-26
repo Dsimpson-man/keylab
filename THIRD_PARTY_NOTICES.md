@@ -1,18 +1,24 @@
 # 第三方声明（THIRD_PARTY_NOTICES）
 
-本仓库当前 **不包含任何第三方代码、字体、音频样本、乐谱或图标素材**。全部代码与素材均为 KeyLab 原创，受根目录 `LICENSE`（MIT License）覆盖。
+本仓库 **不包含任何第三方运行时代码、字体、音频样本或图标素材**。运行时仅使用浏览器内置 API（Web Audio、Web MIDI、`localStorage`、Service Worker、ES Module），无 `npm install`、无 CDN 依赖，代码均为 KeyLab 原创，受根目录 `LICENSE`（MIT）覆盖。
 
-## 说明
+## 已引入的内容数据（CC0-1.0 公有领域）
 
-- KeyLab 0.2.0 是零构建依赖的静态站点，没有 `npm install` 步骤，也不通过 CDN 引入脚本、样式或字体。
-- 运行时仅使用浏览器内置 API：Web Audio、Web MIDI（能力检测）、`localStorage`、Service Worker、ES Module。
-- 开发依赖仅使用 Node.js 内置的 `node:test` 与 `node:assert/strict`，无第三方测试框架。
+以下内容数据来自开源项目的课程内容目录，其许可证为 CC0-1.0（作者放弃著作权、进入公有领域），因此可直接转写使用：
 
-## 计划复用（尚未引入）
+### Pianio
 
-以下开源项目在路线图中被列为「待许可证审查后选择性复用」：
+- **来源**：<https://github.com/ismaelponce/pianio>
+- **许可**：代码为 MIT；`content/` 目录（课程与练习内容）为 **CC0-1.0（公有领域）**。
+- **本仓库使用部分**：仅 `content/` 目录中练习的**结构化数据**（音名+时值的 `measures`、双手、谱号、拍号、BPM、力度、来源标注）。
+- **导入方式**：`scripts/import-pianio.mjs` 读取后转写为 `src/data/pianio-content.js`；`scripts/build-curriculum.mjs` 从中精选曲目与技巧，转写为课程数据 `src/data/curriculum-extras.js`。中文名与教学文案为 KeyLab 原创。
+- **未使用部分**：Pianio 的 React/TypeScript 代码、UI、音频采样均未引入。
 
-- [dacapo](https://github.com/ya-luotao/dacapo)
-- [Pianio](https://git.mitgai.net/ismaelponce/pianio)
+## 计划复用（尚未引入，需先审许可证）
 
-在完成许可证与素材授权审查前，**不会**把它们的任何代码、课程、乐谱、字体、音频或图标复制进本仓库。若未来引入，会在此文件中补充每个来源的名称、版本、许可证类型与版权声明，并确保与 `LICENSE` 的 MIT 覆盖边界清晰区分。
+以下项目的代码与素材尚未引入，若未来引入会在此处补充来源、版本、许可证与版权声明：
+
+- [dacapo](https://github.com/ya-luotao/dacapo)（MIT 代码；依赖 Verovio / VexFlow / Bravura 等各自带许可）
+- [Pianio](https://github.com/ismaelponce/pianio) 的代码（MIT）与音频采样
+
+在完成审查前，**不会**把它们的任何代码、字体、音频、乐谱或图标复制进本仓库。

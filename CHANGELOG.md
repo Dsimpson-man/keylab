@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1-beta — 2026-10-27（测试版）
+
+- 新增 H「入门曲目」模块（30 首经典曲）与 I「手指技巧」模块（20 条 Level-1 技巧），课程总数 14 → 64。
+- 曲目与技巧数据转写自 Pianio 的 `content/` 目录（CC0-1.0 公有领域）；中文名与教学文案为 KeyLab 原创。
+- 判分引擎新增 `wait` 模式：弹错只提示实际音与目标音的关系、不重置进度，弹对当前音再前进，用于曲目跟弹。
+- 新增 `scripts/import-pianio.mjs`（题库导入）与 `scripts/build-curriculum.mjs`（课程生成）。
+- UI 配色迁移为 Claude 暖色系：暖米白底 + 陶土橙主色 + 暖棕黑文字，收敛圆角与阴影。
+- 单元测试 103 → 105 项（新增 wait 模式测试）。
+- 更新 `THIRD_PARTY_NOTICES.md`，记录 Pianio CC0 内容来源。
+
 ## 0.2.0-beta — 2026-10-27（测试版）
 
 > 测试版说明：14 节课程、统一 MIDI 事件管线、进度 v2 schema 与 103 项单元测试已完成；SMK-37 PRO 与 iPad / iPhone 尚未实机验证，原生 Core MIDI 桥接仅预留适配器、未实现。

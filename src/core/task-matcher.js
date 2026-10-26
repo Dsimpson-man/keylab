@@ -5,7 +5,8 @@
  * 输出包含状态与中文反馈，避免上层重复实现判分逻辑。
  *
  * mode:
- * - sequence：按顺序弹出 target。
+ * - sequence：按顺序弹出 target（弹错回到第一个音）。
+ * - wait：按顺序弹出 target，但弹错只提示、不重置进度（曲目练习用）。
  * - staff：与 sequence 相同，但界面显示谱面。
  * - together：同时按住 target 中的全部音（不允许额外音）。
  */
@@ -99,6 +100,11 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
     wrongAttempts += 1;
     const relation = describeRelation(expected, note, { naming });
     const errorText = describePitchError(note, expected, { naming });
+    if (mode === 'wait') {
+      // 曲目练习：弹错只提示实际音与目标音的关系，不重置进度，等弹对当前音再前进。
+      feedback = `${errorText} 保持当前位置，继续弹 ${noteName(expected, { naming })}。`;
+      return { status: STATUS.WRONG, feedback, index, total: target.length, complete: false, relation };
+    }
     if (note === target[0] && index > 0) {
       index = 1;
       feedback = `${errorText} 已从 ${noteName(target[0], { naming })} 重新开始，继续弹 ${noteName(target[1], { naming })}。`;

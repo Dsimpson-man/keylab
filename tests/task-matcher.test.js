@@ -27,6 +27,29 @@ test('顺序任务：弹错后重来并说明实际音', () => {
   assert.match(result.feedback, /D4/);
 });
 
+test('等待任务：弹错不重置进度，弹对当前音再前进', () => {
+  const matcher = createTaskMatcher({ mode: 'wait', target: [60, 62, 64] });
+  matcher.accept(on(60));
+  const wrong = matcher.accept(on(65));
+  assert.equal(wrong.status, MATCH_STATUS.WRONG);
+  assert.equal(wrong.index, 1, '弹错后应停留在当前位置');
+  assert.match(wrong.feedback, /保持当前位置/);
+  assert.match(wrong.feedback, /D4/);
+  const recover = matcher.accept(on(62));
+  assert.equal(recover.status, MATCH_STATUS.PROGRESS);
+  assert.equal(recover.index, 2);
+  const done = matcher.accept(on(64));
+  assert.equal(done.status, MATCH_STATUS.COMPLETE);
+});
+
+test('等待任务：完整完成', () => {
+  const matcher = createTaskMatcher({ mode: 'wait', target: [60, 62] });
+  matcher.accept(on(60));
+  const result = matcher.accept(on(62));
+  assert.equal(result.status, MATCH_STATUS.COMPLETE);
+  assert.match(result.feedback, /完成/);
+});
+
 test('顺序任务：弹回第一个音时从第二步继续', () => {
   const matcher = createTaskMatcher({ mode: 'sequence', target: [60, 62, 64] });
   matcher.accept(on(60));

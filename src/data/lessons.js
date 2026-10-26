@@ -9,7 +9,10 @@
  * - together：同时按住一组音（和弦）。
  * - rhythm：跟随节拍器，在指定拍点弹同一个音。
  * - staff：看着五线谱按顺序弹出音符（判分逻辑同 sequence）。
+ * - wait：按顺序弹出（弹错不重置，弹对当前音再前进），用于曲目跟弹。
  */
+
+import { EXTRA_LESSONS } from './curriculum-extras.js';
 
 export const LESSON_MODULES = Object.freeze([
   { id: 'A', name: '认识键盘', short: '键盘', description: '从黑键分组开始，找到 C，认识七个音名与不同八度。' },
@@ -18,7 +21,9 @@ export const LESSON_MODULES = Object.freeze([
   { id: 'D', name: '和弦', short: '和弦', description: '同时按下多个音，认识大三和弦与小三和弦。' },
   { id: 'E', name: '节奏', short: '节奏', description: '跟随节拍器，理解拍子与音符时值。' },
   { id: 'F', name: '五线谱', short: '识谱', description: '认识高音谱号，把谱面音符对应到琴键。' },
-  { id: 'G', name: 'MIDI 入门', short: 'MIDI', description: '理解 Note On / Note Off、力度、编号与通道。' }
+  { id: 'G', name: 'MIDI 入门', short: 'MIDI', description: '理解 Note On / Note Off、力度、编号与通道。' },
+  { id: 'H', name: '入门曲目', short: '曲目', description: '30 首入门经典曲，跟着旋律一步步弹出来。' },
+  { id: 'I', name: '手指技巧', short: '技巧', description: '入门级手指与音阶技巧，建立稳定的触键。' }
 ]);
 
 export const LESSONS = Object.freeze([
@@ -431,7 +436,8 @@ export const LESSONS = Object.freeze([
     passCriteria: '按顺序弹完三个音。',
     completion: '你已经验证了半音加 1、八度加 12 的编号规律。',
     reviewTip: '不查表，算出 A4 的 MIDI 编号，并在实验室里验证。'
-  }
+  },
+  ...EXTRA_LESSONS
 ]);
 
 export function findLesson(id) {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'keylab-static-v2';
+const CACHE_NAME = 'keylab-static-v3';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -16,6 +16,8 @@ const CORE_ASSETS = [
   './src/core/task-matcher.js',
   './src/data/lessons.js',
   './src/data/quizzes.js',
+  './src/data/pianio-content.js',
+  './src/data/curriculum-extras.js',
   './src/midi/device-profiles.js',
   './src/midi/midi-normalizer.js',
   './src/midi/midi-service.js',

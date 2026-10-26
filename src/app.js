@@ -36,7 +36,7 @@ import { renderHome, renderCourses, renderLessonPage, renderPractice, renderMidi
 import { KeyboardController } from './ui/keyboard.js';
 import { showToast, openModal, confirmDialog, closeModal, initModalBindings } from './ui/notify.js';
 
-const APP_VERSION = '0.2.0-beta';
+const APP_VERSION = '0.2.1-beta';
 
 const state = {
   currentView: 'home',

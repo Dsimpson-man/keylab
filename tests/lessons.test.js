@@ -45,7 +45,7 @@ test('所有目标音都是合法 MIDI 编号，且在 37 键范围附近', () =
 });
 
 test('任务模式有效，节奏任务包含速度与拍数', () => {
-  const modes = new Set(['sequence', 'together', 'rhythm', 'staff']);
+  const modes = new Set(['sequence', 'together', 'rhythm', 'staff', 'wait']);
   for (const lesson of LESSONS) {
     assert.ok(modes.has(lesson.task.mode), `${lesson.id} 使用了未知模式 ${lesson.task.mode}`);
     if (lesson.task.mode === 'rhythm') {
@@ -56,6 +56,9 @@ test('任务模式有效，节奏任务包含速度与拍数', () => {
     }
     if (lesson.task.mode === 'together') {
       assert.equal(new Set(lesson.task.target).size, lesson.task.target.length, `${lesson.id} 和弦目标重复`);
+    }
+    if (lesson.task.mode === 'wait') {
+      assert.ok(lesson.task.target.length > 0, `${lesson.id} 等待任务目标为空`);
     }
   }
 });
