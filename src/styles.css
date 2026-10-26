@@ -954,6 +954,8 @@ code {
   .mini-keyboard { height: 98px; }
   .piano-key { min-height: 136px; }
   .mini-keyboard .piano-key { min-height: 98px; }
+  .piano-key.black { min-height: 0; height: 60%; }
+  .mini-keyboard .piano-key.black { height: 60%; }
 
   .mobile-nav {
     position: fixed; z-index: 30; inset: auto 0 0;
