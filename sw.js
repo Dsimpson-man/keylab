@@ -1,4 +1,4 @@
-const CACHE_NAME = 'keylab-static-v3';
+const CACHE_NAME = 'keylab-static-v6';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -7,9 +7,13 @@ const CORE_ASSETS = [
   './src/app.js',
   './src/audio/audio-engine.js',
   './src/audio/metronome.js',
+  './src/core/ear-engine.js',
   './src/core/event-bus.js',
   './src/core/lesson-engine.js',
   './src/core/music-theory.js',
+  './src/core/piece-mastery.js',
+  './src/core/piece-rhythm.js',
+  './src/core/practice-report.js',
   './src/core/quiz-engine.js',
   './src/core/rhythm-analyzer.js',
   './src/core/rhythm-session.js',
@@ -30,6 +34,7 @@ const CORE_ASSETS = [
   './src/ui/notify.js',
   './src/ui/staff.js',
   './src/ui/views.js',
+  './vendor/vexflow.js',
   './assets/icon.svg',
   './assets/apple-touch-icon.png',
   './assets/icon-192.png',

@@ -100,12 +100,17 @@ function pieceLesson(item, number) {
     ],
     examples: [item.title, `${beats} 拍`, `${bpm} BPM`],
     tip: '先听示范，再慢慢跟弹；弹错不重置，弹对当前音才前进。',
-    demo: { label: `${cn} 示范`, notes: item.melody.slice(0, 12) },
+    demo: { label: `${cn} 示范`, notes: item.melody },
+    // 完整谱面数据：measures / clef / timeSignature，供真五线谱渲染。
+    measures: item.measures,
+    clef: item.clef,
+    timeSignature: item.timeSignature,
     task: {
       mode: 'wait',
       prompt: `弹出《${cn}》的旋律（共 ${item.melody.length} 个音）。`,
       target: item.melody,
-      labels: labelsFor(item.melody)
+      labels: labelsFor(item.melody),
+      tempo: bpm
     },
     passCriteria: `按顺序弹完 ${item.melody.length} 个旋律音。`,
     completion: `你已经完整弹出《${cn}》。`,
@@ -135,12 +140,17 @@ function techniqueLesson(item, number) {
     ],
     examples: [item.title, `${bpm} BPM`, hand],
     tip: '手腕放松，手指主动。弹错不重置，弹对当前音再继续。',
-    demo: { label: `${cn} 示范`, notes: item.melody.slice(0, 10) },
+    demo: { label: `${cn} 示范`, notes: item.melody },
+    // 完整谱面数据：measures / clef / timeSignature，供真五线谱渲染。
+    measures: item.measures,
+    clef: item.clef,
+    timeSignature: item.timeSignature,
     task: {
       mode: 'wait',
       prompt: `弹出「${cn}」（共 ${item.melody.length} 个音）。`,
       target: item.melody,
-      labels: labelsFor(item.melody)
+      labels: labelsFor(item.melody),
+      tempo: bpm
     },
     passCriteria: `按顺序弹完 ${item.melody.length} 个音。`,
     completion: `你已完成「${cn}」。`,

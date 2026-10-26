@@ -7,9 +7,10 @@
 | 版本 | 状态 | 主要内容 |
 | --- | --- | --- |
 | 0.1.0 | 已发布 | 6 节课程、四选一测验、37 键虚拟键盘、MIDI 事件监视器、本地进度（v1 schema）。 |
-| 0.2.0-beta | 当前（测试版） | 14 节课（A–G 七个模块）、任务类型扩展（sequence/together/rhythm/staff）、统一 MIDI 事件管线、设备档案、节拍器与真实时间戳节奏分析、进度 v2 schema + 导出/导入、103 项单元测试、SW 版本化缓存。SMK-37 PRO 与 iPad 实机未验证。 |
-| 0.3.0 | 规划中 | 原生 iOS / iPadOS Core MIDI 桥接（需 macOS + Xcode + Apple 开发者环境 + 实机）。 |
-| 后续 | 规划中 | 许可证审查后选择性移植 dacapo / Pianio 的课程与判分思路。 |
+| 0.2.0-beta | 已发布 | 14 节课（A–G 七个模块）、任务类型扩展（sequence/together/rhythm/staff）、统一 MIDI 事件管线、设备档案、节拍器与真实时间戳节奏分析、进度 v2 schema + 导出/导入、103 项单元测试、SW 版本化缓存。 |
+| 0.3.0-beta | 当前（测试版） | 64 节课（+30 首入门曲 +20 条技巧）、真五线谱（VexFlow）、真实钢琴采样、延音踏板、曲目节奏判分、练耳训练、曲目熟练度、练习报告、132 项单元测试。SMK-37 PRO 与 iPad 实机未验证。 |
+| 0.4.0 | 规划中 | 原生 iOS / iPadOS Core MIDI 桥接（需 macOS + Xcode + Apple 开发者环境 + 实机）。 |
+| 后续 | 规划中 | tempoLadder、分小节测量、更多曲目/技巧扩展。 |
 
 ## 0.2.0 已实现能力
 
@@ -28,7 +29,7 @@
 
 ## 已模拟、不可当作实机能力
 
-- **虚拟键盘发声**：是 Web Audio 合成音，不是 SMK-37 PRO 的本机音源。
+- **虚拟键盘发声**：是本地真实钢琴采样（Salamander Grand Piano，CC-BY），不是 SMK-37 PRO 的本机音源；采样未就绪时回退到振荡器合成音。
 - **虚拟 MIDI 事件**：屏幕琴键产生的事件来源标记为 `virtual`，仅用于教学与演示，不代表外接设备已连接。
 - **原生桥接适配器**（`native-bridge-adapter.js`）：只预留 `window.KeyLabNativeMIDI` 接收入口，**尚未实现**真实 Core MIDI 数据通路。
 
@@ -41,7 +42,7 @@
 
 以上结论须在持有真机后逐项记录到 `docs/MIDI_ARCHITECTURE.md` 的设备档案与观察清单中。
 
-## 0.3.0：iOS / iPadOS 原生桥接
+## 0.4.0：iOS / iPadOS 原生桥接
 
 目标：让 iPad 稳定读取实体键盘。
 

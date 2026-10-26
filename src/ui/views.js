@@ -8,9 +8,13 @@
 import { LESSONS, LESSON_MODULES, nextLessonAfter, lessonsByModule, LESSON_COUNT } from '../data/lessons.js';
 import { QUIZ_CATEGORIES, QUESTIONS, questionsForCategory, findQuestion } from '../data/quizzes.js';
 import { noteName } from '../core/music-theory.js';
+import { describePractice } from '../core/practice-report.js';
+import { describePieceRhythm } from '../core/piece-rhythm.js';
+import { earQuestionNotes } from '../core/ear-engine.js';
+import { masteryLevel, masteryLabel } from '../core/piece-mastery.js';
 import { localDateKey, calculateStreak, quizAccuracy } from '../storage/progress-store.js';
 import { renderPianoPanel, renderKeyboardMarkup } from './keyboard.js';
-import { renderStaff } from './staff.js';
+import { renderStaff, renderMeasures } from './staff.js';
 import { escapeHtml, percent, joinPills, formatDateTime } from './format.js';
 import { eventTypeLabel, describeEvent, hexBytes, sourceLabel } from '../midi/midi-normalizer.js';
 
@@ -19,6 +23,7 @@ const VIEW_META = {
   courses: ['LEARN STEP BY STEP', '互动课程'],
   lesson: ['LESSON IN PROGRESS', '课程学习'],
   practice: ['TRAIN YOUR EAR & MIND', '乐理练习'],
+  ear: ['LISTEN & IDENTIFY', '练耳训练'],
   midi: ['CONNECT · PLAY · UNDERSTAND', 'MIDI 实验室'],
   progress: ['YOUR PRACTICE HISTORY', '学习记录']
 };
@@ -153,10 +158,12 @@ export function renderCourses(state, activeModule = null) {
         </div>
         <div class="course-grid">${lessons.map(lesson => {
           const done = completed.has(lesson.id);
+          const mastery = lesson.module === 'H' ? renderMasteryStars(state.progress.pieceStats?.[lesson.id]) : '';
           return `<article class="lesson-card ${done ? 'is-done' : ''}">
             <div class="lesson-card-top"><span class="lesson-badge">${lesson.number}</span><span class="tag ${done ? 'mint' : ''}">${done ? '✓ 已完成' : lesson.duration}</span></div>
             <h3>${escapeHtml(lesson.title)}</h3>
             <p>${escapeHtml(lesson.summary)}</p>
+            ${mastery}
             <div class="lesson-card-foot"><span>${escapeHtml(lesson.category)}</span><button class="btn ${done ? 'btn-ghost' : 'btn-primary'} btn-small" data-action="open-lesson" data-id="${lesson.id}">${done ? '复习课程' : '开始学习'} →</button></div>
           </article>`;
         }).join('')}</div>
@@ -206,6 +213,8 @@ export function renderLessonPage(state) {
             <div class="exercise-progress"><span id="lesson-exercise-progress" style="width:0%"></span></div>
           </div>
           <div class="exercise-feedback" id="lesson-exercise-feedback" data-tone="${state.lessonStatus?.complete ? 'success' : 'default'}" role="status" aria-live="polite">${escapeHtml(state.lessonStatus?.feedback || (isRhythm ? '点击「开始节拍器」，听预备拍后开始演奏。' : '准备好后，按提示弹奏第一个音。'))}</div>
+          ${state.lessonStatus?.practiceReport ? `<div class="practice-report" role="status">${escapeHtml(describePractice(state.lessonStatus.practiceReport))}</div>` : ''}
+          ${state.lessonStatus?.pieceRhythmReport ? `<div class="practice-report practice-report--rhythm" role="status">${escapeHtml(describePieceRhythm(state.lessonStatus.pieceRhythmReport.summary, 300))}</div>` : ''}
           <div class="rhythm-area" id="lesson-rhythm-area" ${isRhythm ? '' : 'hidden'}>
             <div class="rhythm-controls">
               <button class="btn btn-primary btn-small" data-action="toggle-lesson-metronome" id="lesson-metronome-button">开始节拍器 ▶</button>
@@ -218,6 +227,7 @@ export function renderLessonPage(state) {
           <p class="exercise-note">${escapeHtml(lesson.passCriteria)}</p>
         </div>
         ${isStaff ? `<div class="staff-block">${renderStaff(lesson.task.target, { title: '本课谱面', showLabels: true })}<p class="staff-note">这是教学用简化的高音谱表。实际乐谱还会有调号、拍号与更复杂的节奏。</p></div>` : ''}
+        ${lesson.measures ? `<div class="staff-block">${renderMeasures(lesson.measures, { clef: lesson.clef || 'G', timeSignature: lesson.timeSignature || [4, 4], title: `${lesson.title} · 完整乐谱`, showLabels: true })}</div>` : ''}
         ${renderPianoPanel({
           start: 48,
           count: 37,
@@ -239,10 +249,32 @@ export function renderLessonPage(state) {
         <p class="side-note">${escapeHtml(lesson.completion)}</p>
         <h3 class="side-title">复习提示</h3>
         <p class="side-note">${escapeHtml(lesson.reviewTip)}</p>
+        ${lesson.module === 'H' ? renderPieceMastery(lesson, state.progress.pieceStats) : ''}
         <div class="side-progress"><div class="panel-head"><h3>课程进度</h3><span class="tag">${lesson.number}/${String(LESSON_COUNT).padStart(2, '0')}</span></div><div class="progress-track"><span id="lesson-side-progress" style="width:${done ? 100 : 0}%"></span></div><p class="side-note">${done ? '你已完成这节课。可以再次练习巩固记忆。' : '完成键盘练习后会自动记录本课完成。'}</p></div>
         ${next ? `<div class="side-next"><div class="panel-head"><h3>接下来</h3><span class="tag">NEXT</span></div><button class="side-next-button" data-action="open-lesson" data-id="${next.id}"><span><strong>${escapeHtml(next.title)}</strong><small>${escapeHtml(next.category)} · ${next.duration}</small></span><span aria-hidden="true">→</span></button></div>` : ''}
       </aside>
     </div>`;
+}
+
+function renderMasteryStars(stat) {
+  const level = masteryLevel(stat);
+  if (!level) return '';
+  const stars = '★★★★★'.slice(0, level);
+  return `<div class="card-mastery">${stars}</div>`;
+}
+
+function renderPieceMastery(lesson, pieceStats) {
+  const stat = pieceStats?.[lesson.id] || null;
+  const level = masteryLevel(stat);
+  const stars = '★★★★★'.slice(0, level);
+  const empty = '☆☆☆☆☆'.slice(0, 5 - level);
+  const accuracy = stat?.bestAccuracy ?? null;
+  const evenness = stat?.bestEvenness ?? null;
+  return `<div class="piece-mastery">
+    <div class="panel-head"><h3>曲目熟练度</h3><span class="tag">${masteryLabel(level)}</span></div>
+    <div class="piece-stars" aria-label="熟练度 ${level} 星">${stars}${empty}</div>
+    <p class="side-note">练习 ${stat?.plays ?? 0} 次${accuracy != null ? ` · 最好节奏 ${accuracy}%` : ''}${evenness != null ? ` · 最好力度 ${evenness}%` : ''}</p>
+  </div>`;
 }
 
 // ---------------------------------------------------------------- 练习
@@ -356,6 +388,87 @@ function renderAnswerFeedback(state, question) {
     <strong>${correct ? '回答正确！' : '还差一点。'}</strong>
     ${correct ? escapeHtml(question.explanation) : `你选择了「${escapeHtml(chosen)}」，正确答案是「${escapeHtml(question.options[question.answer])}」。${escapeHtml(question.explanation)}`}
   </div>`;
+}
+
+// ---------------------------------------------------------------- 练耳训练
+
+export function renderEar(state) {
+  const session = state.earSession;
+  if (!session) return renderEarMenu(state);
+  if (session.done) return renderEarResult(state);
+  return renderEarQuestion(state);
+}
+
+function renderEarMenu(state) {
+  const stats = state.progress.earStats || { answered: 0, correct: 0 };
+  const rate = stats.answered ? Math.round((stats.correct / stats.answered) * 100) : null;
+  return `<div class="view-intro">
+      <div><h2>练耳训练</h2><p>不看琴键，只用耳朵听——识别音程、和弦色彩与旋律走向。点「播放」听声音，再选答案。</p></div>
+      <span class="tag purple">EAR TRAINING</span>
+    </div>
+    <div class="practice-categories">
+      <button class="practice-category featured" data-action="start-ear" data-ear-type="mixed">
+        <span class="category-icon" aria-hidden="true">🎧</span><h3>混合练耳</h3><p>随机混合音程、和弦与旋律听辨。</p><span class="category-bottom">综合挑战 <span aria-hidden="true">→</span></span>
+      </button>
+      <button class="practice-category" data-action="start-ear" data-ear-type="interval">
+        <span class="category-icon" aria-hidden="true">↔</span><h3>音程听辨</h3><p>听两个音，判断它们之间的音程。</p><span class="category-bottom">开始 →</span>
+      </button>
+      <button class="practice-category" data-action="start-ear" data-ear-type="chord">
+        <span class="category-icon" aria-hidden="true">▰</span><h3>和弦听辨</h3><p>听一个和弦，判断它是大三、小三、增或减。</p><span class="category-bottom">开始 →</span>
+      </button>
+      <button class="practice-category" data-action="start-ear" data-ear-type="melody">
+        <span class="category-icon" aria-hidden="true">〰</span><h3>旋律走向</h3><p>听一段短旋律，判断它是上行还是下行。</p><span class="category-bottom">开始 →</span>
+      </button>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon purple" aria-hidden="true">🎧</div><div><div class="stat-value">${stats.answered}</div><div class="stat-label">练耳已答题数</div></div></div>
+      <div class="stat-card"><div class="stat-icon mint" aria-hidden="true">◎</div><div><div class="stat-value">${rate === null ? '—' : `${rate}%`}</div><div class="stat-label">练耳正确率</div></div></div>
+    </div>`;
+}
+
+function renderEarQuestion(state) {
+  const session = state.earSession;
+  const question = session.questions[session.index];
+  const typeLabel = { interval: '音程听辨', chord: '和弦听辨', melody: '旋律走向' }[question.type] || '练耳';
+  return `<div class="view-intro">
+      <div><button class="back-link" data-action="exit-ear">← 返回练耳菜单</button><div class="eyebrow">${typeLabel}</div><h2>${typeLabel}</h2><p>先点「播放」听声音，再选择你的答案。</p></div>
+      <span class="tag purple">${session.index + 1} / ${session.questions.length}</span>
+    </div>
+    <section class="quiz-card">
+      <div class="quiz-progress"><span style="width:${percent(session.index + 1, session.questions.length)}%"></span></div>
+      <div class="quiz-top"><span class="tag">${typeLabel}</span><span class="quiz-progress-text">${session.index + 1} / ${session.questions.length} · 已答对 ${session.score}</span></div>
+      <div class="ear-play-row">
+        <button class="btn btn-primary" data-action="play-ear" ${session.played ? '' : 'autofocus'}>▶ 播放声音</button>
+        <span class="ear-play-hint">${session.played ? '可以重复播放，听清楚再答。' : '点击播放，仔细听。'}</span>
+      </div>
+      <div class="answer-list">${question.options.map((option, index) => {
+        let className = 'answer-option';
+        if (session.answered && index === question.answer) className += ' correct';
+        else if (session.answered && index === session.selected) className += ' wrong';
+        return `<button class="${className}" data-action="answer-ear" data-index="${index}" ${session.answered ? 'disabled' : ''}>
+          <span class="answer-letter">${String.fromCharCode(65 + index)}</span><span>${escapeHtml(option)}</span>
+        </button>`;
+      }).join('')}</div>
+      ${session.answered ? `<div class="answer-feedback ${session.selected === question.answer ? 'good' : 'bad'}" role="status"><strong>${session.selected === question.answer ? '回答正确！' : '还差一点。'}</strong> ${escapeHtml(question.explanation)}</div>` : '<p class="quiz-hint">先播放，再选择你听到的音程/和弦/走向。</p>'}
+      <div class="quiz-bottom">
+        <span class="quiz-score">本轮已答对 ${session.score} 题</span>
+        ${session.answered ? `<button class="btn btn-primary" data-action="next-ear">${session.index === session.questions.length - 1 ? '查看结果' : '下一题'} →</button>` : '<span class="tag">先播放再作答</span>'}
+      </div>
+    </section>`;
+}
+
+function renderEarResult(state) {
+  const session = state.earSession;
+  const total = session.questions.length;
+  const rate = percent(session.score, total);
+  return `<div class="view-intro"><div><h2>练耳结果</h2><p>听辨需要反复练习，答错是建立听感的一部分。</p></div></div>
+    <section class="quiz-card"><div class="quiz-result">
+      <div class="result-mark" aria-hidden="true">${rate >= 75 ? '✓' : '↻'}</div>
+      <span class="tag ${rate >= 75 ? 'mint' : 'purple'}">EAR TRAINING COMPLETE</span>
+      <h2>${session.score} / ${total} 题答对</h2>
+      <p>本轮正确率为 ${rate}%。${rate >= 75 ? '耳朵越来越敏锐了！' : '多听几遍示范，感受音程与和弦的色彩差异。'}</p>
+      <div class="button-row" style="justify-content:center"><button class="btn btn-primary" data-action="retry-ear">再练一次 ↻</button><button class="btn btn-ghost" data-action="exit-ear">返回练耳菜单</button></div>
+    </div></section>`;
 }
 
 // ---------------------------------------------------------------- MIDI 实验室

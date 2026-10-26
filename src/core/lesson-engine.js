@@ -8,6 +8,8 @@
 
 import { createTaskMatcher, MATCH_STATUS } from './task-matcher.js';
 import { EVENT_TYPES } from '../midi/midi-normalizer.js';
+import { analyzePractice } from './practice-report.js';
+import { melodyNotesWithBeats, buildNoteGrid, analyzePieceRhythm } from './piece-rhythm.js';
 
 export function createLessonEngine({ lesson, onStatusChange = () => {} } = {}) {
   if (!lesson) throw new Error('缺少课程数据');
@@ -15,6 +17,8 @@ export function createLessonEngine({ lesson, onStatusChange = () => {} } = {}) {
     return createRhythmLessonEngine({ lesson, onStatusChange });
   }
   const matcher = createTaskMatcher(lesson.task);
+  // 记录正确按键（note / velocity / timestamp），用于完成时生成练习报告。
+  let correctRecords = [];
   let status = {
     index: 0,
     total: lesson.task.target.length,
@@ -34,6 +38,14 @@ export function createLessonEngine({ lesson, onStatusChange = () => {} } = {}) {
     return emit({ index: lesson.task.target.length, complete: true, feedback, external: true });
   }
 
+  function recordCorrect(event) {
+    correctRecords.push({
+      note: event.note,
+      velocity: event.velocity ?? 100,
+      timestamp: event.timestamp ?? performance.now()
+    });
+  }
+
   return {
     lesson,
     get enablesKeyboard() {
@@ -45,21 +57,49 @@ export function createLessonEngine({ lesson, onStatusChange = () => {} } = {}) {
     get complete() {
       return status.complete;
     },
+    get practiceReport() {
+      return analyzePractice(correctRecords, { tempoBpm: lesson.task.tempo ?? null });
+    },
+    get pieceRhythmReport() {
+      // 曲目节奏：用 measures 时值 + 真实按键时间戳，计算每个音的节奏偏差。
+      if (!lesson.measures || !correctRecords.length) return null;
+      const melody = melodyNotesWithBeats(lesson.measures);
+      if (!melody.length) return null;
+      const bpm = lesson.task.tempo || 80;
+      const grid = buildNoteGrid(melody, bpm);
+      // 对齐到第一个正确按键的时间（忽略用户起手的延迟）。
+      const firstRecord = correctRecords[0];
+      const offsetMs = firstRecord.timestamp - grid[0].startMs;
+      return analyzePieceRhythm(correctRecords, grid, { toleranceMs: 300, offsetMs });
+    },
     handleEvent(event) {
       if (!event || !Number.isInteger(event.note)) return status;
       if (event.type !== EVENT_TYPES.NOTE_ON && event.type !== EVENT_TYPES.NOTE_OFF) return status;
       if (status.complete) return status;
+      const prevIndex = matcher.status().index;
       const result = matcher.accept(event);
-      return emit({
+      // 只有「推进了进度」的正确 Note On 才记为正确按键（弹错不计）。
+      if (event.type === EVENT_TYPES.NOTE_ON && result.index > prevIndex && !result.complete) {
+        recordCorrect(event);
+      }
+      const next = {
         index: result.index,
         total: result.total,
         complete: result.complete,
         feedback: result.feedback,
         wrongAttempts: matcher.status().wrongAttempts
-      });
+      };
+      if (result.complete) {
+        // 完成时补记最后一个正确音（上面的条件排除了 complete 分支）。
+        if (event.type === EVENT_TYPES.NOTE_ON && result.index === result.total) recordCorrect(event);
+        next.practiceReport = this.practiceReport;
+        next.pieceRhythmReport = this.pieceRhythmReport;
+      }
+      return emit(next);
     },
     reset() {
       matcher.reset();
+      correctRecords = [];
       return emit({ index: 0, total: lesson.task.target.length, complete: false, feedback: '准备好后，按提示弹奏第一个音。', wrongAttempts: 0, external: false });
     },
     completeExternally

@@ -1,7 +1,7 @@
 // 本文件由 scripts/build-curriculum.mjs 自动生成，请勿手改。
 // 曲目/技巧旋律数据来自 Pianio content/（CC0-1.0）；中文名与教学文案为 KeyLab 原创。
 // 详见 docs/INTEGRATION_PLAN.md 与 THIRD_PARTY_NOTICES.md。
-// 生成时间：2026-10-26T19:49:07.129Z
+// 生成时间：2026-10-26T20:51:26.355Z
 export const EXTRA_LESSONS = Object.freeze([
 {
   "id": "songs-b-001",
@@ -49,9 +49,80 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       60,
       62,
-      64
+      64,
+      64,
+      62,
+      62,
+      64,
+      64,
+      65,
+      67,
+      67,
+      65,
+      64,
+      62,
+      60,
+      60,
+      62,
+      64,
+      62,
+      60,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "E4:q",
+      "F4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "D4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "F4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "C4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《欢乐颂》的旋律（共 30 个音）。",
@@ -118,7 +189,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 80
   },
   "passCriteria": "按顺序弹完 30 个旋律音。",
   "completion": "你已经完整弹出《欢乐颂》。",
@@ -170,9 +242,112 @@ export const EXTRA_LESSONS = Object.freeze([
       65,
       64,
       64,
-      62
+      62,
+      62,
+      60,
+      67,
+      67,
+      65,
+      65,
+      64,
+      64,
+      62,
+      67,
+      67,
+      65,
+      65,
+      64,
+      64,
+      62,
+      60,
+      60,
+      67,
+      67,
+      69,
+      69,
+      67,
+      65,
+      65,
+      64,
+      64,
+      62,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "C4:q",
+      "G4:q",
+      "G4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "F4:q",
+      "F4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "C4:h"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "F4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "D4:h"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "F4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "D4:h"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "G4:q",
+      "G4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "F4:q",
+      "F4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《小星星》的旋律（共 42 个音）。",
@@ -263,7 +438,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 88
   },
   "passCriteria": "按顺序弹完 42 个旋律音。",
   "completion": "你已经完整弹出《小星星》。",
@@ -315,9 +491,72 @@ export const EXTRA_LESSONS = Object.freeze([
       62,
       62,
       64,
-      67
+      67,
+      67,
+      64,
+      62,
+      60,
+      62,
+      64,
+      64,
+      64,
+      64,
+      62,
+      62,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:h"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "D4:h"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "G4:h"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《玛丽有只小羊羔》的旋律（共 26 个音）。",
@@ -376,7 +615,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 88
   },
   "passCriteria": "按顺序弹完 26 个旋律音。",
   "completion": "你已经完整弹出《玛丽有只小羊羔》。",
@@ -428,9 +668,46 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       60,
       62,
-      62
+      62,
+      62,
+      62,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "D4:q",
+      "C4:h"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:h"
+    ],
+    [
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "D4:e",
+      "D4:e",
+      "D4:e",
+      "D4:e"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《热十字面包》的旋律（共 17 个音）。",
@@ -471,7 +748,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 92
   },
   "passCriteria": "按顺序弹完 17 个旋律音。",
   "completion": "你已经完整弹出《热十字面包》。",
@@ -523,9 +801,68 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       62,
       64,
-      65
+      65,
+      65,
+      65,
+      65,
+      65,
+      64,
+      64,
+      64,
+      67,
+      67,
+      65,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "E4:q",
+      "E4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:h"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:w"
+    ],
+    [
+      "F4:q",
+      "F4:q",
+      "F4:q",
+      "F4:q"
+    ],
+    [
+      "F4:q",
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "F4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《铃儿响叮当》的旋律（共 24 个音）。",
@@ -580,7 +917,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "F4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 112
   },
   "passCriteria": "按顺序弹完 24 个旋律音。",
   "completion": "你已经完整弹出《铃儿响叮当》。",
@@ -632,9 +970,68 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       62,
       62,
+      60,
+      60,
+      60,
+      60,
+      67,
+      69,
+      69,
+      67,
+      64,
+      64,
+      62,
+      62,
       60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "C4:q",
+      "C4:q",
+      "G4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "D4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "C4:q",
+      "G4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "D4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《老麦克唐纳有个农场》的旋律（共 24 个音）。",
@@ -689,7 +1086,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 88
   },
   "passCriteria": "按顺序弹完 24 个旋律音。",
   "completion": "你已经完整弹出《老麦克唐纳有个农场》。",
@@ -741,9 +1139,76 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       62,
       64,
-      64
+      64,
+      67,
+      64,
+      62,
+      64,
+      64,
+      67,
+      69,
+      67,
+      64,
+      60,
+      62,
+      64,
+      67,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:q",
+      "E4:q"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "G4:q",
+      "E4:q",
+      "D4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "G4:q",
+      "A4:q"
+    ],
+    [
+      "G4:h",
+      "E4:h"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《噢，苏珊娜》的旋律（共 28 个音）。",
@@ -806,7 +1271,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 104
   },
   "passCriteria": "按顺序弹完 28 个旋律音。",
   "completion": "你已经完整弹出《噢，苏珊娜》。",
@@ -858,9 +1324,67 @@ export const EXTRA_LESSONS = Object.freeze([
       67,
       65,
       70,
-      69
+      69,
+      65,
+      65,
+      72,
+      69,
+      70,
+      67,
+      69,
+      69,
+      70,
+      67,
+      65
     ]
   },
+  "measures": [
+    [
+      "F4:e",
+      "F4:e",
+      "G4:q",
+      "F4:q"
+    ],
+    [
+      "A4:h",
+      "F4:q"
+    ],
+    [
+      "F4:e",
+      "F4:e",
+      "G4:q",
+      "F4:q"
+    ],
+    [
+      "Bb4:h",
+      "A4:q"
+    ],
+    [
+      "F4:e",
+      "F4:e",
+      "C5:q",
+      "A4:q"
+    ],
+    [
+      "Bb4:h",
+      "G4:q"
+    ],
+    [
+      "A4:e",
+      "A4:e",
+      "Bb4:q",
+      "G4:q"
+    ],
+    [
+      "F4:h",
+      "R:q"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    3,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《生日快乐》的旋律（共 23 个音）。",
@@ -913,7 +1437,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "A♯4",
       "G4",
       "F4"
-    ]
+    ],
+    "tempo": 80
   },
   "passCriteria": "按顺序弹完 23 个旋律音。",
   "completion": "你已经完整弹出《生日快乐》。",
@@ -965,9 +1490,54 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       64,
       67,
-      69
+      69,
+      67,
+      64,
+      60,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "A4:h",
+      "G4:q"
+    ],
+    [
+      "E4:h",
+      "C4:q"
+    ],
+    [
+      "D4:h",
+      "R:q"
+    ],
+    [
+      "C4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "A4:h",
+      "G4:q"
+    ],
+    [
+      "E4:h",
+      "C4:q"
+    ],
+    [
+      "C4:h",
+      "R:q"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    3,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《奇异恩典》的旋律（共 16 个音）。",
@@ -1006,7 +1576,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 72
   },
   "passCriteria": "按顺序弹完 16 个旋律音。",
   "completion": "你已经完整弹出《奇异恩典》。",
@@ -1058,9 +1629,68 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       65,
       64,
-      65
+      65,
+      67,
+      67,
+      69,
+      67,
+      65,
+      64,
+      65,
+      67,
+      62,
+      67,
+      64,
+      60
     ]
   },
+  "measures": [
+    [
+      "G4:q",
+      "A4:q",
+      "G4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "D4:q",
+      "E4:q",
+      "F4:h"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "D4:h",
+      "G4:h"
+    ],
+    [
+      "E4:h",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《伦敦桥要倒了》的旋律（共 24 个音）。",
@@ -1115,7 +1745,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G4",
       "E4",
       "C4"
-    ]
+    ],
+    "tempo": 100
   },
   "passCriteria": "按顺序弹完 24 个旋律音。",
   "completion": "你已经完整弹出《伦敦桥要倒了》。",
@@ -1167,9 +1798,76 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       62,
       64,
-      67
+      67,
+      67,
+      60,
+      64,
+      64,
+      64,
+      64,
+      62,
+      62,
+      62,
+      64,
+      64,
+      64,
+      67,
+      67,
+      67,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "G4:h",
+      "C4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "G4:q",
+      "G4:q"
+    ],
+    [
+      "G4:h",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《跳向我的露》的旋律（共 28 个音）。",
@@ -1232,7 +1930,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G4",
       "G4",
       "C4"
-    ]
+    ],
+    "tempo": 112
   },
   "passCriteria": "按顺序弹完 28 个旋律音。",
   "completion": "你已经完整弹出《跳向我的露》。",
@@ -1284,9 +1983,74 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       62,
       60,
-      62
+      62,
+      64,
+      60,
+      67,
+      67,
+      64,
+      67,
+      67,
+      64,
+      60,
+      62,
+      64,
+      62,
+      60,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "G4:q",
+      "G4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "E4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:h",
+      "C4:h"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "E4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "E4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《康城赛马》的旋律（共 27 个音）。",
@@ -1347,7 +2111,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 120
   },
   "passCriteria": "按顺序弹完 27 个旋律音。",
   "completion": "你已经完整弹出《康城赛马》。",
@@ -1399,9 +2164,74 @@ export const EXTRA_LESSONS = Object.freeze([
       62,
       60,
       62,
-      64
+      64,
+      65,
+      62,
+      60,
+      62,
+      64,
+      65,
+      67,
+      69,
+      67,
+      65,
+      64,
+      60,
+      62,
+      64,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "F4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "F4:h",
+      "D4:h"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《简单的礼物》的旋律（共 27 个音）。",
@@ -1462,7 +2292,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "E4",
       "C4"
-    ]
+    ],
+    "tempo": 92
   },
   "passCriteria": "按顺序弹完 27 个旋律音。",
   "completion": "你已经完整弹出《简单的礼物》。",
@@ -1514,9 +2345,84 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       65,
       67,
-      64
+      64,
+      65,
+      67,
+      67,
+      69,
+      67,
+      65,
+      64,
+      60,
+      67,
+      69,
+      67,
+      65,
+      64,
+      60,
+      60,
+      67,
+      60,
+      60,
+      67,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "C4:q"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "C4:q"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "G4:e",
+      "A4:e",
+      "G4:e",
+      "F4:e",
+      "E4:q",
+      "C4:q"
+    ],
+    [
+      "G4:e",
+      "A4:e",
+      "G4:e",
+      "F4:e",
+      "E4:q",
+      "C4:q"
+    ],
+    [
+      "C4:q",
+      "G4:q",
+      "C4:h"
+    ],
+    [
+      "C4:q",
+      "G4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《两只老虎》的旋律（共 32 个音）。",
@@ -1587,7 +2493,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "G4",
       "C4"
-    ]
+    ],
+    "tempo": 96
   },
   "passCriteria": "按顺序弹完 32 个旋律音。",
   "completion": "你已经完整弹出《两只老虎》。",
@@ -1639,9 +2546,73 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       62,
       64,
+      60,
+      64,
+      64,
+      65,
+      67,
+      67,
+      65,
+      64,
+      62,
+      60,
+      62,
+      64,
+      60,
+      62,
       60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "C4:q",
+      "E4:q",
+      "D4:h"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "C4:h",
+      "R:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "F4:q",
+      "G4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "C4:q"
+    ],
+    [
+      "D4:h",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《扬基歌》的旋律（共 26 个音）。",
@@ -1700,7 +2671,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 120
   },
   "passCriteria": "按顺序弹完 26 个旋律音。",
   "completion": "你已经完整弹出《扬基歌》。",
@@ -1752,9 +2724,76 @@ export const EXTRA_LESSONS = Object.freeze([
       65,
       64,
       64,
+      62,
+      62,
+      60,
+      67,
+      67,
+      65,
+      65,
+      64,
+      64,
+      62,
+      67,
+      67,
+      65,
+      65,
+      64,
+      64,
       62
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "C4:q",
+      "G4:q",
+      "G4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "F4:q",
+      "F4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "C4:h"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "F4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "D4:h"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "F4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "D4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《咩咩黑绵羊》的旋律（共 28 个音）。",
@@ -1817,7 +2856,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "E4",
       "D4"
-    ]
+    ],
+    "tempo": 88
   },
   "passCriteria": "按顺序弹完 28 个旋律音。",
   "completion": "你已经完整弹出《咩咩黑绵羊》。",
@@ -1869,9 +2909,69 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       65,
       67,
-      67
+      67,
+      64,
+      64,
+      64,
+      60,
+      60,
+      60,
+      67,
+      65,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:h",
+      "C4:q"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:q"
+    ],
+    [
+      "G4:h",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "C4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    3,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《划呀划小船》的旋律（共 23 个音）。",
@@ -1924,7 +3024,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 80
   },
   "passCriteria": "按顺序弹完 23 个旋律音。",
   "completion": "你已经完整弹出《划呀划小船》。",
@@ -1976,9 +3077,90 @@ export const EXTRA_LESSONS = Object.freeze([
       65,
       67,
       64,
-      62
+      62,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      62,
+      64,
+      60,
+      62,
+      64,
+      65,
+      60,
+      60,
+      60,
+      60,
+      60,
+      62,
+      64,
+      60,
+      62,
+      67,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "G4:q",
+      "G4:h"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "G4:h"
+    ],
+    [
+      "F4:q",
+      "E4:q",
+      "F4:q",
+      "G4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:h"
+    ],
+    [
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "D4:e",
+      "E4:e",
+      "C4:e"
+    ],
+    [
+      "D4:q",
+      "E4:q",
+      "F4:h"
+    ],
+    [
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "C4:e",
+      "D4:e",
+      "E4:e",
+      "C4:e"
+    ],
+    [
+      "D4:q",
+      "G4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《这个老人》的旋律（共 35 个音）。",
@@ -2055,7 +3237,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "G4",
       "C4"
-    ]
+    ],
+    "tempo": 100
   },
   "passCriteria": "按顺序弹完 35 个旋律音。",
   "completion": "你已经完整弹出《这个老人》。",
@@ -2107,9 +3290,62 @@ export const EXTRA_LESSONS = Object.freeze([
       71,
       69,
       67,
+      67,
+      71,
+      69,
+      69,
+      74,
+      74,
+      72,
+      71,
       67
     ]
   },
+  "measures": [
+    [
+      "G4:q",
+      "G4:q",
+      "B4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "D4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "B4:q"
+    ],
+    [
+      "A4:h",
+      "R:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "B4:q"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "D5:q"
+    ],
+    [
+      "D5:q",
+      "C5:q",
+      "B4:q"
+    ],
+    [
+      "G4:h",
+      "R:q"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    3,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《鼬鼠钻出来》的旋律（共 20 个音）。",
@@ -2156,7 +3392,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C5",
       "B4",
       "G4"
-    ]
+    ],
+    "tempo": 100
   },
   "passCriteria": "按顺序弹完 20 个旋律音。",
   "completion": "你已经完整弹出《鼬鼠钻出来》。",
@@ -2208,9 +3445,114 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       67,
       64,
-      67
+      67,
+      64,
+      67,
+      64,
+      67,
+      62,
+      65,
+      62,
+      65,
+      64,
+      67,
+      64,
+      67,
+      65,
+      67,
+      65,
+      67,
+      65,
+      67,
+      65
     ]
   },
+  "measures": [
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "D4:q",
+      "F4:q",
+      "R:q"
+    ],
+    [
+      "D4:q",
+      "F4:q",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:q",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "F4:h",
+      "R:q"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    3,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《筷子圆舞曲》的旋律（共 31 个音）。",
@@ -2279,7 +3621,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "F4",
       "G4",
       "F4"
-    ]
+    ],
+    "tempo": 120
   },
   "passCriteria": "按顺序弹完 31 个旋律音。",
   "completion": "你已经完整弹出《筷子圆舞曲》。",
@@ -2331,9 +3674,72 @@ export const EXTRA_LESSONS = Object.freeze([
       62,
       62,
       64,
-      67
+      67,
+      67,
+      64,
+      62,
+      60,
+      62,
+      64,
+      64,
+      64,
+      64,
+      62,
+      62,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:h"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "D4:h"
+    ],
+    [
+      "E4:q",
+      "G4:q",
+      "G4:h"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《轻轻划》的旋律（共 26 个音）。",
@@ -2392,7 +3798,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 92
   },
   "passCriteria": "按顺序弹完 26 个旋律音。",
   "completion": "你已经完整弹出《轻轻划》。",
@@ -2444,9 +3851,72 @@ export const EXTRA_LESSONS = Object.freeze([
       62,
       62,
       64,
-      64
+      64,
+      64,
+      64,
+      62,
+      60,
+      62,
+      64,
+      64,
+      64,
+      64,
+      62,
+      62,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:h"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "D4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:h"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q",
+      "D4:q"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《去告诉罗迪姑妈》的旋律（共 26 个音）。",
@@ -2505,7 +3975,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 84
   },
   "passCriteria": "按顺序弹完 26 个旋律音。",
   "completion": "你已经完整弹出《去告诉罗迪姑妈》。",
@@ -2557,9 +4028,72 @@ export const EXTRA_LESSONS = Object.freeze([
       69,
       67,
       65,
-      64
+      64,
+      60,
+      64,
+      62,
+      62,
+      64,
+      62,
+      60,
+      64,
+      62,
+      60,
+      60,
+      60,
+      64,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "C4:q",
+      "C4:q",
+      "E4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "G4:h"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:q",
+      "F4:q"
+    ],
+    [
+      "E4:q",
+      "C4:q",
+      "E4:h"
+    ],
+    [
+      "D4:q",
+      "D4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:q",
+      "E4:q",
+      "D4:h"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "C4:q",
+      "E4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《公交车轮子转》的旋律（共 26 个音）。",
@@ -2618,7 +4152,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "E4",
       "C4"
-    ]
+    ],
+    "tempo": 100
   },
   "passCriteria": "按顺序弹完 26 个旋律音。",
   "completion": "你已经完整弹出《公交车轮子转》。",
@@ -2670,9 +4205,60 @@ export const EXTRA_LESSONS = Object.freeze([
       65,
       64,
       62,
+      60,
+      64,
+      65,
+      67,
+      64,
+      62,
+      60,
       60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q"
+    ],
+    [
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:q"
+    ],
+    [
+      "F4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:h",
+      "R:q"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:q"
+    ],
+    [
+      "E4:q",
+      "D4:q",
+      "C4:q"
+    ],
+    [
+      "C4:h",
+      "R:q"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    3,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《滴答滴答钟》的旋律（共 19 个音）。",
@@ -2717,7 +4303,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 108
   },
   "passCriteria": "按顺序弹完 19 个旋律音。",
   "completion": "你已经完整弹出《滴答滴答钟》。",
@@ -2769,9 +4356,72 @@ export const EXTRA_LESSONS = Object.freeze([
       67,
       65,
       64,
-      62
+      62,
+      60,
+      62,
+      64,
+      65,
+      67,
+      69,
+      67,
+      65,
+      64,
+      62,
+      64,
+      65,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "A4:q",
+      "G4:q",
+      "F4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "C4:q",
+      "D4:h"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:q",
+      "A4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:h"
+    ],
+    [
+      "D4:q",
+      "E4:q",
+      "F4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《杰克和吉尔》的旋律（共 26 个音）。",
@@ -2830,7 +4480,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "F4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 104
   },
   "passCriteria": "按顺序弹完 26 个旋律音。",
   "completion": "你已经完整弹出《杰克和吉尔》。",
@@ -2882,9 +4533,68 @@ export const EXTRA_LESSONS = Object.freeze([
       65,
       67,
       67,
-      65
+      65,
+      64,
+      64,
+      65,
+      64,
+      62,
+      60,
+      62,
+      64,
+      62,
+      60,
+      60,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "E4:q",
+      "E4:q",
+      "E4:q"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "E4:h"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "G4:h"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:h"
+    ],
+    [
+      "E4:q",
+      "F4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "E4:h"
+    ],
+    [
+      "D4:q",
+      "C4:q",
+      "C4:h"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《迈克尔划船上岸》的旋律（共 24 个音）。",
@@ -2939,7 +4649,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 76
   },
   "passCriteria": "按顺序弹完 24 个旋律音。",
   "completion": "你已经完整弹出《迈克尔划船上岸》。",
@@ -2991,9 +4702,72 @@ export const EXTRA_LESSONS = Object.freeze([
       74,
       71,
       69,
+      67,
+      69,
+      67,
+      69,
+      71,
+      67,
+      69,
+      67,
+      67,
+      71,
+      69,
+      67,
+      62,
       67
     ]
   },
+  "measures": [
+    [
+      "G4:q",
+      "B4:q",
+      "D5:q",
+      "R:q"
+    ],
+    [
+      "G4:q",
+      "B4:q",
+      "D5:q",
+      "R:q"
+    ],
+    [
+      "G4:q",
+      "B4:q",
+      "D5:q",
+      "B4:q"
+    ],
+    [
+      "A4:h",
+      "G4:h"
+    ],
+    [
+      "A4:q",
+      "G4:q",
+      "A4:q",
+      "B4:q"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "G4:q",
+      "B4:q",
+      "A4:q",
+      "G4:q"
+    ],
+    [
+      "D4:h",
+      "G4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《圣徒行进》的旋律（共 25 个音）。",
@@ -3050,7 +4824,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G4",
       "D4",
       "G4"
-    ]
+    ],
+    "tempo": 100
   },
   "passCriteria": "按顺序弹完 25 个旋律音。",
   "completion": "你已经完整弹出《圣徒行进》。",
@@ -3102,9 +4877,74 @@ export const EXTRA_LESSONS = Object.freeze([
       67,
       65,
       64,
-      65
+      65,
+      67,
+      64,
+      64,
+      64,
+      64,
+      65,
+      67,
+      67,
+      67,
+      69,
+      67,
+      65,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "G4:q",
+      "A4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:h",
+      "E4:h"
+    ],
+    [
+      "E4:q",
+      "E4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "G4:q",
+      "A4:q"
+    ],
+    [
+      "G4:q",
+      "F4:q",
+      "E4:q",
+      "D4:q"
+    ],
+    [
+      "C4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《嘘，小宝贝》的旋律（共 27 个音）。",
@@ -3165,7 +5005,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 72
   },
   "passCriteria": "按顺序弹完 27 个旋律音。",
   "completion": "你已经完整弹出《嘘，小宝贝》。",
@@ -3217,9 +5058,70 @@ export const EXTRA_LESSONS = Object.freeze([
       69,
       69,
       67,
-      71
+      71,
+      69,
+      67,
+      67,
+      69,
+      67,
+      71,
+      69,
+      67,
+      62,
+      67,
+      69,
+      67,
+      67
     ]
   },
+  "measures": [
+    [
+      "D4:q",
+      "D4:q",
+      "D4:q",
+      "D4:q"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "G4:h"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "A4:q",
+      "G4:q"
+    ],
+    [
+      "B4:h",
+      "A4:h"
+    ],
+    [
+      "G4:q",
+      "G4:q",
+      "A4:q",
+      "G4:q"
+    ],
+    [
+      "B4:q",
+      "A4:q",
+      "G4:h"
+    ],
+    [
+      "D4:q",
+      "G4:q",
+      "A4:q",
+      "G4:q"
+    ],
+    [
+      "G4:w"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《我这小小的光》的旋律（共 25 个音）。",
@@ -3276,7 +5178,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "A4",
       "G4",
       "G4"
-    ]
+    ],
+    "tempo": 104
   },
   "passCriteria": "按顺序弹完 25 个旋律音。",
   "completion": "你已经完整弹出《我这小小的光》。",
@@ -3328,9 +5231,78 @@ export const EXTRA_LESSONS = Object.freeze([
       69,
       69,
       69,
+      69,
+      67,
+      69,
+      64,
+      69,
+      71,
+      72,
+      71,
+      69,
+      67,
+      69,
+      64,
+      69,
+      71,
+      72,
+      71,
+      69,
       69
     ]
   },
+  "measures": [
+    [
+      "A4:q",
+      "A4:q",
+      "A4:q",
+      "A4:q"
+    ],
+    [
+      "A4:q",
+      "G4:q",
+      "A4:h"
+    ],
+    [
+      "A4:q",
+      "A4:q",
+      "A4:q",
+      "A4:q"
+    ],
+    [
+      "A4:q",
+      "G4:q",
+      "A4:h"
+    ],
+    [
+      "E4:q",
+      "A4:q",
+      "B4:q",
+      "C5:q"
+    ],
+    [
+      "B4:q",
+      "A4:q",
+      "G4:q",
+      "A4:q"
+    ],
+    [
+      "E4:q",
+      "A4:q",
+      "B4:q",
+      "C5:q"
+    ],
+    [
+      "B4:q",
+      "A4:q",
+      "A4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出《祖姆加利加利》的旋律（共 29 个音）。",
@@ -3395,7 +5367,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "B4",
       "A4",
       "A4"
-    ]
+    ],
+    "tempo": 108
   },
   "passCriteria": "按顺序弹完 29 个旋律音。",
   "completion": "你已经完整弹出《祖姆加利加利》。",
@@ -3447,6 +5420,27 @@ export const EXTRA_LESSONS = Object.freeze([
       72
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "D4:e",
+      "E4:e",
+      "F4:e",
+      "G4:e",
+      "A4:e",
+      "B4:e",
+      "C5:e"
+    ],
+    [
+      "C5:h",
+      "R:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「C 大调右手上行」（共 9 个音）。",
@@ -3471,7 +5465,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "B4",
       "C5",
       "C5"
-    ]
+    ],
+    "tempo": 66
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「C 大调右手上行」。",
@@ -3523,6 +5518,27 @@ export const EXTRA_LESSONS = Object.freeze([
       60
     ]
   },
+  "measures": [
+    [
+      "C5:e",
+      "B4:e",
+      "A4:e",
+      "G4:e",
+      "F4:e",
+      "E4:e",
+      "D4:e",
+      "C4:e"
+    ],
+    [
+      "C4:h",
+      "R:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「C 大调右手下行」（共 9 个音）。",
@@ -3547,7 +5563,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 66
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「C 大调右手下行」。",
@@ -3599,6 +5616,27 @@ export const EXTRA_LESSONS = Object.freeze([
       60
     ]
   },
+  "measures": [
+    [
+      "C3:e",
+      "D3:e",
+      "E3:e",
+      "F3:e",
+      "G3:e",
+      "A3:e",
+      "B3:e",
+      "C4:e"
+    ],
+    [
+      "C4:h",
+      "R:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「C 大调左手上行」（共 9 个音）。",
@@ -3623,7 +5661,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "B3",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 66
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「C 大调左手上行」。",
@@ -3675,6 +5714,27 @@ export const EXTRA_LESSONS = Object.freeze([
       48
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "B3:e",
+      "A3:e",
+      "G3:e",
+      "F3:e",
+      "E3:e",
+      "D3:e",
+      "C3:e"
+    ],
+    [
+      "C3:h",
+      "R:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「C 大调左手下行」（共 9 个音）。",
@@ -3699,7 +5759,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D3",
       "C3",
       "C3"
-    ]
+    ],
+    "tempo": 66
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「C 大调左手下行」。",
@@ -3749,9 +5810,32 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       62,
       60,
+      60,
       60
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "D4:e",
+      "E4:e",
+      "F4:e",
+      "G4:e",
+      "F4:e",
+      "E4:e",
+      "D4:e"
+    ],
+    [
+      "C4:q",
+      "C4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「右手五指抬指」（共 11 个音）。",
@@ -3780,7 +5864,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 64
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「右手五指抬指」。",
@@ -3830,9 +5915,32 @@ export const EXTRA_LESSONS = Object.freeze([
       52,
       50,
       48,
+      48,
       48
     ]
   },
+  "measures": [
+    [
+      "C3:e",
+      "D3:e",
+      "E3:e",
+      "F3:e",
+      "G3:e",
+      "F3:e",
+      "E3:e",
+      "D3:e"
+    ],
+    [
+      "C3:q",
+      "C3:q",
+      "C3:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「左手五指抬指」（共 11 个音）。",
@@ -3861,7 +5969,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C3",
       "C3",
       "C3"
-    ]
+    ],
+    "tempo": 64
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「左手五指抬指」。",
@@ -3911,9 +6020,32 @@ export const EXTRA_LESSONS = Object.freeze([
       65,
       69,
       67,
-      64
+      64,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "E4:e",
+      "D4:e",
+      "F4:e",
+      "E4:e",
+      "G4:e",
+      "F4:e",
+      "A4:e"
+    ],
+    [
+      "G4:q",
+      "E4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「右手分解三度」（共 11 个音）。",
@@ -3942,7 +6074,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G4",
       "E4",
       "C4"
-    ]
+    ],
+    "tempo": 60
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「右手分解三度」。",
@@ -3992,9 +6125,32 @@ export const EXTRA_LESSONS = Object.freeze([
       53,
       57,
       55,
-      52
+      52,
+      48
     ]
   },
+  "measures": [
+    [
+      "C3:e",
+      "E3:e",
+      "D3:e",
+      "F3:e",
+      "E3:e",
+      "G3:e",
+      "F3:e",
+      "A3:e"
+    ],
+    [
+      "G3:q",
+      "E3:q",
+      "C3:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「左手分解三度」（共 11 个音）。",
@@ -4023,7 +6179,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G3",
       "E3",
       "C3"
-    ]
+    ],
+    "tempo": 60
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「左手分解三度」。",
@@ -4075,6 +6232,27 @@ export const EXTRA_LESSONS = Object.freeze([
       60
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "E4:e",
+      "G4:e",
+      "E4:e",
+      "C4:e",
+      "E4:e",
+      "G4:e",
+      "E4:e"
+    ],
+    [
+      "C4:h",
+      "R:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「C 和弦右手分解」（共 9 个音）。",
@@ -4099,7 +6277,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G4",
       "E4",
       "C4"
-    ]
+    ],
+    "tempo": 60
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「C 和弦右手分解」。",
@@ -4151,6 +6330,27 @@ export const EXTRA_LESSONS = Object.freeze([
       48
     ]
   },
+  "measures": [
+    [
+      "C3:e",
+      "E3:e",
+      "G3:e",
+      "E3:e",
+      "C3:e",
+      "E3:e",
+      "G3:e",
+      "E3:e"
+    ],
+    [
+      "C3:h",
+      "R:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「C 和弦左手分解」（共 9 个音）。",
@@ -4175,7 +6375,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "G3",
       "E3",
       "C3"
-    ]
+    ],
+    "tempo": 60
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「C 和弦左手分解」。",
@@ -4225,9 +6426,32 @@ export const EXTRA_LESSONS = Object.freeze([
       64,
       64,
       62,
-      64
+      64,
+      62
     ]
   },
+  "measures": [
+    [
+      "D4:e",
+      "D4:e",
+      "D4:e",
+      "D4:e",
+      "E4:e",
+      "E4:e",
+      "E4:e",
+      "E4:e"
+    ],
+    [
+      "D4:q",
+      "E4:q",
+      "D4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「右手二指重复」（共 11 个音）。",
@@ -4256,7 +6480,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "E4",
       "D4"
-    ]
+    ],
+    "tempo": 70
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「右手二指重复」。",
@@ -4306,9 +6531,32 @@ export const EXTRA_LESSONS = Object.freeze([
       52,
       52,
       50,
-      52
+      52,
+      50
     ]
   },
+  "measures": [
+    [
+      "D3:e",
+      "D3:e",
+      "D3:e",
+      "D3:e",
+      "E3:e",
+      "E3:e",
+      "E3:e",
+      "E3:e"
+    ],
+    [
+      "D3:q",
+      "E3:q",
+      "D3:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「左手二指重复」（共 11 个音）。",
@@ -4337,7 +6585,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D3",
       "E3",
       "D3"
-    ]
+    ],
+    "tempo": 70
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「左手二指重复」。",
@@ -4387,9 +6636,32 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       59,
       60,
-      62
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "D4:e",
+      "E4:e",
+      "F4:e",
+      "E4:e",
+      "D4:e",
+      "C4:e",
+      "B3:e"
+    ],
+    [
+      "C4:q",
+      "D4:q",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「右手反向触键」（共 11 个音）。",
@@ -4418,7 +6690,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 62
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「右手反向触键」。",
@@ -4468,9 +6741,32 @@ export const EXTRA_LESSONS = Object.freeze([
       48,
       47,
       48,
-      50
+      50,
+      48
     ]
   },
+  "measures": [
+    [
+      "C3:e",
+      "D3:e",
+      "E3:e",
+      "F3:e",
+      "E3:e",
+      "D3:e",
+      "C3:e",
+      "B2:e"
+    ],
+    [
+      "C3:q",
+      "D3:q",
+      "C3:h"
+    ]
+  ],
+  "clef": "F",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「左手反向触键」（共 11 个音）。",
@@ -4499,7 +6795,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C3",
       "D3",
       "C3"
-    ]
+    ],
+    "tempo": 62
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「左手反向触键」。",
@@ -4549,9 +6846,43 @@ export const EXTRA_LESSONS = Object.freeze([
       60,
       64,
       67,
-      65
+      65,
+      64,
+      62,
+      60,
+      60,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:e",
+      "D4:e",
+      "E4:e",
+      "F4:e",
+      "G4:e",
+      "E4:e",
+      "C4:e",
+      "E4:e"
+    ],
+    [
+      "G4:e",
+      "F4:e",
+      "E4:e",
+      "D4:e",
+      "C4:q",
+      "C4:q"
+    ],
+    [
+      "C4:h",
+      "R:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「技巧检查点」（共 15 个音）。",
@@ -4588,7 +6919,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "C4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 68
   },
   "passCriteria": "按顺序弹完 15 个音。",
   "completion": "你已完成「技巧检查点」。",
@@ -4640,6 +6972,27 @@ export const EXTRA_LESSONS = Object.freeze([
       79
     ]
   },
+  "measures": [
+    [
+      "G4:e",
+      "A4:e",
+      "B4:e",
+      "C5:e",
+      "D5:e",
+      "E5:e",
+      "F#5:e",
+      "G5:e"
+    ],
+    [
+      "G5:h",
+      "R:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「G 大调右手上行」（共 9 个音）。",
@@ -4664,7 +7017,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "F♯5",
       "G5",
       "G5"
-    ]
+    ],
+    "tempo": 66
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「G 大调右手上行」。",
@@ -4716,6 +7070,27 @@ export const EXTRA_LESSONS = Object.freeze([
       67
     ]
   },
+  "measures": [
+    [
+      "G5:e",
+      "F#5:e",
+      "E5:e",
+      "D5:e",
+      "C5:e",
+      "B4:e",
+      "A4:e",
+      "G4:e"
+    ],
+    [
+      "G4:h",
+      "R:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「G 大调右手下行」（共 9 个音）。",
@@ -4740,7 +7115,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "A4",
       "G4",
       "G4"
-    ]
+    ],
+    "tempo": 66
   },
   "passCriteria": "按顺序弹完 9 个音。",
   "completion": "你已完成「G 大调右手下行」。",
@@ -4790,9 +7166,34 @@ export const EXTRA_LESSONS = Object.freeze([
       71,
       72,
       71,
-      69
+      69,
+      67
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "D4:q",
+      "E4:q",
+      "F4:q"
+    ],
+    [
+      "G4:q",
+      "A4:q",
+      "B4:q",
+      "C5:q"
+    ],
+    [
+      "B4:q",
+      "A4:q",
+      "G4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「右手移位」（共 11 个音）。",
@@ -4821,7 +7222,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "B4",
       "A4",
       "G4"
-    ]
+    ],
+    "tempo": 60
   },
   "passCriteria": "按顺序弹完 11 个音。",
   "completion": "你已完成「右手移位」。",
@@ -4871,9 +7273,46 @@ export const EXTRA_LESSONS = Object.freeze([
       67,
       60,
       65,
-      64
+      64,
+      62,
+      60,
+      60
     ]
   },
+  "measures": [
+    [
+      "C4:q",
+      "G4:q"
+    ],
+    [
+      "D4:q",
+      "A4:q"
+    ],
+    [
+      "E4:q",
+      "B4:q"
+    ],
+    [
+      "G4:q",
+      "C4:q"
+    ],
+    [
+      "F4:q",
+      "E4:q"
+    ],
+    [
+      "D4:q",
+      "C4:q"
+    ],
+    [
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    2,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「右手断奏触键」（共 13 个音）。",
@@ -4906,7 +7345,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "D4",
       "C4",
       "C4"
-    ]
+    ],
+    "tempo": 72
   },
   "passCriteria": "按顺序弹完 13 个音。",
   "completion": "你已完成「右手断奏触键」。",
@@ -4956,9 +7396,61 @@ export const EXTRA_LESSONS = Object.freeze([
       71,
       69,
       67,
-      64
+      64,
+      60,
+      64,
+      67,
+      62,
+      64,
+      65,
+      67,
+      69,
+      67,
+      65,
+      64,
+      62,
+      60
     ]
   },
+  "measures": [
+    [
+      "G4:e",
+      "A4:e",
+      "B4:e",
+      "C5:e",
+      "D5:e",
+      "C5:e",
+      "B4:e",
+      "A4:e"
+    ],
+    [
+      "G4:e",
+      "E4:e",
+      "C4:e",
+      "E4:e",
+      "G4:q",
+      "R:q"
+    ],
+    [
+      "D4:e",
+      "E4:e",
+      "F4:e",
+      "G4:e",
+      "A4:e",
+      "G4:e",
+      "F4:e",
+      "E4:e"
+    ],
+    [
+      "D4:h",
+      "C4:h"
+    ]
+  ],
+  "clef": "G",
+  "timeSignature": [
+    4,
+    4
+  ],
   "task": {
     "mode": "wait",
     "prompt": "弹出「技巧终章」（共 23 个音）。",
@@ -5011,7 +7503,8 @@ export const EXTRA_LESSONS = Object.freeze([
       "E4",
       "D4",
       "C4"
-    ]
+    ],
+    "tempo": 68
   },
   "passCriteria": "按顺序弹完 23 个音。",
   "completion": "你已完成「技巧终章」。",

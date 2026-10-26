@@ -1,6 +1,35 @@
 # Changelog
 
+## 0.3.0-beta — 2026-10-27（测试版）
+
+**主题：从「弹对」到「弹好」，并补齐听辨与曲目熟练度。**
+
+- **真五线谱渲染**：引入 VexFlow 4.2.5（MIT，esbuild 打包为 `vendor/vexflow.js` 单文件），重写 `src/ui/staff.js`。曲目/技巧练习页显示完整五线谱（拍号/调号/小节线/时值/附点/休止符/升降号/和弦/低音谱号），`measures`/`clef`/`timeSignature` 完整接入。
+- **真实钢琴音色**：Salamander Grand Piano V2 采样（Yamaha C5，CC-BY 3.0，作者 Alexander Holm），打包进 `assets/piano/`，采样播放 + `playbackRate` 移调，未就绪回退振荡器。
+- **延音踏板（CC64）**：踩下踏板时音符保持，松开后释放。
+- **练习报告**：`src/core/practice-report.js` 输出力度均匀度、平均力度、节奏稳定度（±毫秒）。
+- **曲目节奏判分**：`src/core/piece-rhythm.js` 用 `measures` 时值 + 真实按键时间戳，输出每个音的节奏偏差与节奏准确率。
+- **练耳训练**：新增「练耳」视图（音程/和弦/旋律走向听辨，带播放与四选一判分），`src/core/ear-engine.js`。
+- **曲目熟练度**：`src/core/piece-mastery.js` 独立记录每首曲目的练习次数、最好节奏准确率与最好力度均匀度，计算 1–5 星熟练度，显示在曲目列表与练习页。
+- **示范音不再截断**：完整播放 + 自适应间隔。
+- 单元测试 105 → 132（新增 practice-report 7、piece-rhythm 9、ear-engine 6、piece-mastery 5）。
+
+## 0.2.2-beta — 2026-10-27（测试版）
+
+- **真五线谱渲染**：引入 VexFlow 4.2.5（MIT，打包为 `vendor/vexflow.js` 单文件），重写 `src/ui/staff.js`。
+  - 曲目/技巧练习页现在显示完整五线谱：拍号、调号、小节线、时值、附点、休止符、升降号、和弦、低音谱号。
+  - 曲目 `measures` / `clef` / `timeSignature` 完整数据接入（之前只取了旋律音）。
+- `scripts/build-curriculum.mjs` 补充 `measures`/`clef`/`timeSignature` 字段。
+- Service Worker 缓存版本升到 v5（预缓存 `vendor/vexflow.js`）。
+- 新增 `docs/NEXT_UP.md`（后续优化清单）。
+
 ## 0.2.1-beta — 2026-10-27（测试版）
+
+- **真实钢琴音色**：引入 Salamander Grand Piano V2 采样（Yamaha C5，CC-BY 3.0，作者 Alexander Holm，30 个采样点约 2 MB），打包进 `assets/piano/`，重写 `audio-engine.js` 用采样播放 + `playbackRate` 移调；采样未就绪时回退到振荡器合成音。
+- 新增 `loadSamples()` 后台预加载，`init()` 时自动启动。
+- Service Worker 缓存版本升到 v4；`THIRD_PARTY_NOTICES.md` 记录采样来源与 CC-BY 署名。
+
+## 0.2.1-beta — 2026-10-27（测试版，阶段 A）
 
 - 新增 H「入门曲目」模块（30 首经典曲）与 I「手指技巧」模块（20 条 Level-1 技巧），课程总数 14 → 64。
 - 曲目与技巧数据转写自 Pianio 的 `content/` 目录（CC0-1.0 公有领域）；中文名与教学文案为 KeyLab 原创。

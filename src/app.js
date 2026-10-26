@@ -32,11 +32,13 @@ import { questionsForCategory } from './data/quizzes.js';
 import { noteName } from './core/music-theory.js';
 import { EVENT_TYPES, hexBytes, sourceLabel } from './midi/midi-normalizer.js';
 import { $, $$, escapeHtml, downloadFile, timestampForFilename } from './ui/format.js';
-import { renderHome, renderCourses, renderLessonPage, renderPractice, renderMidiLab, renderProgress, renderEventList, renderHeldList, renderDeviceChecklist, renderImportPreview, renderStorageInfo, viewMeta } from './ui/views.js';
+import { renderHome, renderCourses, renderLessonPage, renderPractice, renderEar, renderMidiLab, renderProgress, renderEventList, renderHeldList, renderDeviceChecklist, renderImportPreview, renderStorageInfo, viewMeta } from './ui/views.js';
+import { makeIntervalEarQuestion, makeChordEarQuestion, makeMelodyEarQuestion, judgeEar, earQuestionNotes } from './core/ear-engine.js';
+import { recordPieceRun } from './core/piece-mastery.js';
 import { KeyboardController } from './ui/keyboard.js';
 import { showToast, openModal, confirmDialog, closeModal, initModalBindings } from './ui/notify.js';
 
-const APP_VERSION = '0.2.1-beta';
+const APP_VERSION = '0.3.0-beta';
 
 const state = {
   currentView: 'home',
@@ -46,6 +48,7 @@ const state = {
   quizSession: null,
   quizMatcher: null,
   quizFeedback: null,
+  earSession: null,
   activeModule: null,
   lab: { filter: 'all', paused: false, expanded: new Set(), learnTarget: null },
   labMetronome: { running: false, beat: 0 }
@@ -118,6 +121,7 @@ function render({ focusSelector = null } = {}) {
   else if (state.currentView === 'courses') content.innerHTML = renderCourses({ progress, midi }, state.activeModule);
   else if (state.currentView === 'lesson') content.innerHTML = renderLessonPage({ progress, midi, lessonId: state.lessonId, lessonStatus: state.lessonStatus });
   else if (state.currentView === 'practice') content.innerHTML = renderPractice({ progress, midi, quizSession: state.quizSession, quizFeedback: state.quizFeedback });
+  else if (state.currentView === 'ear') content.innerHTML = renderEar({ progress, earSession: state.earSession });
   else if (state.currentView === 'midi') content.innerHTML = renderMidiLab({ progress, midi, lab: state.lab, labMetronome: state.labMetronome });
   else if (state.currentView === 'progress') content.innerHTML = renderProgress({ progress, midi });
 
@@ -187,11 +191,14 @@ function updateDeviceStatus() {
 // ---------------------------------------------------------------- 导航
 
 function navigate(view, { pushHash = true } = {}) {
-  if (!['home', 'courses', 'lesson', 'practice', 'midi', 'progress'].includes(view)) view = 'home';
+  if (!['home', 'courses', 'lesson', 'practice', 'ear', 'midi', 'progress'].includes(view)) view = 'home';
   if (view !== 'practice') {
     state.quizSession = null;
     state.quizFeedback = null;
     state.quizMatcher = null;
+  }
+  if (view !== 'ear') {
+    state.earSession = null;
   }
   if (view !== 'lesson' && state.currentView === 'lesson') stopRhythm();
   if (view !== 'midi') {
@@ -217,7 +224,7 @@ function parseHash() {
     const id = hash.slice('lesson/'.length);
     if (findLesson(id)) return { view: 'lesson', lessonId: id };
   }
-  if (['home', 'courses', 'practice', 'midi', 'progress'].includes(hash)) return { view: hash };
+  if (['home', 'courses', 'practice', 'ear', 'midi', 'progress'].includes(hash)) return { view: hash };
   return { view: 'home' };
 }
 
@@ -245,12 +252,21 @@ function openLesson(id, { pushHash = true } = {}) {
 function markLessonCompleted(lessonId) {
   const firstTime = !progress.completedLessons.includes(lessonId);
   if (firstTime) progress.completedLessons.push(lessonId);
+  // 曲目（H 模块）完成时，独立记录熟练度。
+  const lesson = findLesson(lessonId);
+  if (lesson?.module === 'H' && state.lessonStatus) {
+    const report = state.lessonStatus.practiceReport;
+    const rhythm = state.lessonStatus.pieceRhythmReport;
+    progress.pieceStats = recordPieceRun(progress.pieceStats, lessonId, {
+      accuracyPercent: rhythm?.summary?.accuracyPercent ?? null,
+      evennessPercent: report?.evennessPercent ?? null
+    });
+  }
   recordActivity();
   persistNow();
   renderLessonActions();
   updateLessonUI();
   if (firstTime) {
-    const lesson = findLesson(lessonId);
     showToast(`已完成「${lesson?.title || '课程'}」，进度已保存在本地。`, { tone: 'success' });
   }
 }
@@ -341,6 +357,10 @@ bus.on('note:off', event => {
 });
 
 bus.on('control:change', event => {
+  // CC64 = 延音踏板：踩下时让音符保持，松开后释放。
+  if (event.controller === 64) {
+    audio.setSustain(event.value >= 64);
+  }
   if (state.lab.learnTarget) {
     const target = state.lab.learnTarget;
     progress.ccMappings[event.controller] = target;
@@ -687,6 +707,101 @@ function handleNextQuestion() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ---------------------------------------------------------------- 练耳
+
+function startEar(earType = 'mixed') {
+  const count = 6;
+  const questions = [];
+  const rootNotes = [60, 62, 64, 65, 67, 69]; // C4 到 A4 的白键，听辨范围
+  for (let i = 0; i < count; i += 1) {
+    const root = rootNotes[i % rootNotes.length];
+    const type = earType === 'mixed'
+      ? ['interval', 'chord', 'melody'][i % 3]
+      : earType;
+    if (type === 'interval') questions.push(makeIntervalEarQuestion(root));
+    else if (type === 'chord') questions.push(makeChordEarQuestion(root));
+    else questions.push(makeMelodyEarQuestion(root));
+  }
+  state.earSession = {
+    type: earType,
+    questions,
+    index: 0,
+    score: 0,
+    answered: false,
+    selected: null,
+    played: false,
+    done: false
+  };
+  progress.practiceSessions += 1;
+  recordActivity();
+  persistNow();
+  navigate('ear');
+}
+
+function playEarSound() {
+  const session = state.earSession;
+  if (!session) return;
+  const question = session.questions[session.index];
+  const notes = earQuestionNotes(question);
+  if (!notes.length) return;
+  session.played = true;
+  // 依次播放（间隔 350ms），音程两音、和弦同响、旋律依次。
+  demoTimers.forEach(timer => window.clearTimeout(timer));
+  demoTimers = [];
+  if (question.type === 'chord') {
+    notes.forEach(note => audio.noteOn(note, 90, { source: 'ear' }));
+    window.setTimeout(() => notes.forEach(note => audio.noteOff(note, { source: 'ear' })), 900);
+  } else {
+    notes.forEach((note, index) => {
+      const timer = window.setTimeout(() => {
+        audio.noteOn(note, 90, { source: 'ear' });
+        const stop = window.setTimeout(() => audio.noteOff(note, { source: 'ear' }), 500);
+        demoTimers.push(stop);
+      }, index * 380);
+      demoTimers.push(timer);
+    });
+  }
+  render();
+}
+
+function handleEarAnswer(index) {
+  const session = state.earSession;
+  if (!session || session.answered) return;
+  const question = session.questions[session.index];
+  const result = judgeEar(question, index);
+  if (!result) return;
+  session.answered = true;
+  session.selected = index;
+  if (result.correct) session.score += 1;
+  progress.earStats = progress.earStats || { answered: 0, correct: 0 };
+  progress.earStats.answered += 1;
+  if (result.correct) progress.earStats.correct += 1;
+  recordActivity();
+  persistNow();
+  render();
+}
+
+function handleNextEar() {
+  const session = state.earSession;
+  if (!session) return;
+  if (session.index >= session.questions.length - 1) {
+    session.done = true;
+    render();
+    return;
+  }
+  session.index += 1;
+  session.answered = false;
+  session.selected = null;
+  session.played = false;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function exitEar() {
+  state.earSession = null;
+  navigate('ear');
+}
+
 // ---------------------------------------------------------------- 设置
 
 function applySettingsFromProgress() {
@@ -858,6 +973,24 @@ async function handleAction(button) {
       state.quizFeedback = null;
       navigate('practice');
       break;
+    case 'start-ear':
+      startEar(button.dataset.earType || 'mixed');
+      break;
+    case 'play-ear':
+      playEarSound();
+      break;
+    case 'answer-ear':
+      handleEarAnswer(Number(button.dataset.index));
+      break;
+    case 'next-ear':
+      handleNextEar();
+      break;
+    case 'retry-ear':
+      startEar(state.earSession?.type || 'mixed');
+      break;
+    case 'exit-ear':
+      exitEar();
+      break;
     case 'play-demo':
       playDemo(button.dataset.notes, button.dataset.label);
       break;
@@ -1005,12 +1138,15 @@ function playDemo(notesText, label) {
   demoTimers.forEach(timer => window.clearTimeout(timer));
   demoTimers = [];
   showToast(`示范：${label || notes.map(note => noteName(note, { naming: progress.settings.naming })).join(' · ')}`);
+  // 音多时压缩间隔，避免完整示范拖得太长（如 42 音的《小星星》）。
+  const spacing = notes.length > 24 ? 300 : notes.length > 16 ? 380 : 520;
+  const duration = spacing - 60;
   notes.forEach((note, index) => {
     const timer = window.setTimeout(async () => {
       await audio.noteOn(note, 96, { source: 'demo' });
-      const stopTimer = window.setTimeout(() => audio.noteOff(note, { source: 'demo' }), 520);
+      const stopTimer = window.setTimeout(() => audio.noteOff(note, { source: 'demo' }), duration);
       demoTimers.push(stopTimer);
-    }, index * 620);
+    }, index * spacing);
     demoTimers.push(timer);
   });
 }
@@ -1161,6 +1297,9 @@ function init() {
   if (nativeBridge.constructor.isAvailable()) {
     nativeBridge.install();
   }
+
+  // 预加载真实钢琴采样（后台进行，失败会回退到振荡器合成音）。
+  void audio.loadSamples();
 
   render();
   // 首次渲染后再同步一次输入状态（例如已经注入的原生桥接）。
