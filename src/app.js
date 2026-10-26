@@ -336,7 +336,27 @@ function updateLessonUI() {
   if (side) side.style.width = `${status.complete ? 100 : (status.index / total) * 100}%`;
   const exercise = $('#lesson-exercise');
   if (exercise) exercise.classList.toggle('is-complete', Boolean(status.complete));
+  syncNextNoteHighlight();
   renderLessonActions();
+}
+
+/** 高亮「下一个要弹的音」——零基础不用看谱，键盘上亮着的键就是下一个。 */
+function syncNextNoteHighlight() {
+  if (state.currentView !== 'lesson' || !state.lessonStatus || state.lessonStatus.complete) {
+    clearNextNoteHighlight();
+    return;
+  }
+  const lesson = findLesson(state.lessonId);
+  const target = lesson?.task?.target;
+  if (!target || !target.length) return;
+  const nextNote = target[Math.min(state.lessonStatus.index, target.length - 1)];
+  $$('.piano-key').forEach(key => {
+    key.classList.toggle('is-next', Number(key.dataset.note) === nextNote);
+  });
+}
+
+function clearNextNoteHighlight() {
+  $$('.piano-key.is-next').forEach(key => key.classList.remove('is-next'));
 }
 
 function updateLastNoteLabels() {
