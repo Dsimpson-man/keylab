@@ -107,13 +107,35 @@ export function renderHome(state) {
     </div>`;
 }
 
+/** 根据已完成课程，生成「你现在能做什么」的能力感文案（而非干巴巴的数字）。 */
+function capabilityMilestone(state) {
+  const done = new Set(state.progress.completedLessons);
+  const has = id => done.has(id);
+  // 按「能力里程碑」从高到低判断，给最靠前的能力。
+  const milestones = [
+    { test: has('midi-numbers'), headline: '你已经能看懂 MIDI 编号了。', description: '你会用琴键验证半音加 1、八度加 12 的规律，也理解了通道。接下来，去曲目库完整弹一首喜欢的曲子吧。' },
+    { test: has('staff-basics'), headline: '你开始能看谱弹琴了。', description: '高音谱号的线与间，你已经能对应到琴键上。这是识谱的第一步，继续加油。' },
+    { test: has('rhythm-basics'), headline: '你已经能跟着节拍稳定弹奏了。', description: '四分音符、BPM、落点准确，这些你已经亲手练过。现在可以去试试更有挑战的节奏。' },
+    { test: has('minor-chords'), headline: '你已经能弹出大小三和弦了。', description: '大三和弦的明亮、小三和弦的忧伤，你都亲手按出来过。和弦是伴奏的基础。' },
+    { test: has('triads'), headline: '你已经能弹出和弦了。', description: '同时按住几个音构成和弦，这个你已经做到了。继续认识更多和弦吧。' },
+    { test: has('c-major'), headline: '你已经能弹出音阶了。', description: 'C 大调音阶，你从头到尾完整弹过了。手指开始有了「走路」的感觉。' },
+    { test: has('semitones'), headline: '你已经理解半音和全音了。', description: '相邻琴键的距离、E-F 与 B-C 之间没有黑键，这些你已经会判断了。' },
+    { test: has('find-c'), headline: '你已经能找到中央 C 了。', description: '用黑键分组定位 C，这是看懂整把键盘的钥匙。你已经掌握了。' },
+    { test: has('black-groups'), headline: '你已经迈出了第一步。', description: '黑键的分组规律，你已经在琴键上亲手验证过了。这是理解整把键盘的基础。' }
+  ];
+  const hit = milestones.find(m => m.test);
+  if (!hit) return { headline: '从按下第一个音开始，<br><em>真正理解音乐。</em>', description: '把乐理变成可以亲手验证的体验。' };
+  return { headline: hit.headline, description: hit.description };
+}
+
 function renderHero(state) {
   const hasProgress = state.progress.completedLessons.length > 0;
+  const milestone = capabilityMilestone(state);
   return `<section class="hero">
     <div class="hero-copy">
       <span class="hero-kicker">A SMALL STEP, A NEW SOUND</span>
-      <h2>从按下第一个音开始，<br><em>真正理解音乐。</em></h2>
-      <p>把乐理变成可以亲手验证的体验。学音符、练节奏、认识和弦，再连接你的 MIDI 键盘，逐步看懂声音背后的规则。</p>
+      <h2>${hasProgress ? milestone.headline : '从按下第一个音开始，<br><em>真正理解音乐。</em>'}</h2>
+      <p>${hasProgress ? milestone.description : '把乐理变成可以亲手验证的体验。学音符、练节奏、认识和弦，再连接你的 MIDI 键盘，逐步看懂声音背后的规则。'}</p>
       <div class="button-row">
         <button class="btn btn-primary" data-action="continue-learning">${hasProgress ? '继续上次学习' : '开始第一课'} <span aria-hidden="true">↗</span></button>
         <button class="btn btn-dark-ghost" data-view="midi">探索 MIDI 实验室 <span aria-hidden="true">⌁</span></button>
