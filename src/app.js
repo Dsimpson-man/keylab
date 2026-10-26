@@ -267,8 +267,26 @@ function markLessonCompleted(lessonId) {
   renderLessonActions();
   updateLessonUI();
   if (firstTime) {
-    showToast(`已完成「${lesson?.title || '课程'}」，进度已保存在本地。`, { tone: 'success' });
+    showToast(`🎉 你完成了「${lesson?.title || '课程'}」！${completionCheer(lesson)}`, { tone: 'success', duration: 3600 });
   }
+}
+
+/** 完成课程时的「能力感」反馈：说出用户刚刚掌握的具体能力，而不是泛泛的「已完成」。 */
+function completionCheer(lesson) {
+  if (!lesson) return '';
+  const title = lesson.title;
+  const byModule = {
+    A: `你现在能在键盘上找到 ${title} 了。`,
+    B: `你已经会用琴键听出音与音之间的距离了。`,
+    C: `你刚刚亲手弹出了一条完整的音阶。`,
+    D: `你已经能弹出真正的和弦了。`,
+    E: `你能跟着节拍稳定地弹奏了。`,
+    F: `你开始能看着五线谱弹琴了。`,
+    G: `你理解了键盘背后的 MIDI 世界。`,
+    H: `你现在能完整弹出一首曲子《${title}》了！`,
+    I: `你的手指技巧又进一步：完成了「${title}」。`
+  };
+  return byModule[lesson.module] || `你刚刚掌握了「${title}」。`;
 }
 
 // ---------------------------------------------------------------- 课程界面更新
@@ -298,6 +316,15 @@ function updateLessonUI() {
   const total = lesson?.task.target.length || 1;
   if (counter) counter.textContent = `${Math.min(status.index, total)}/${total}`;
   if (bar) bar.style.width = `${Math.min((status.index / total) * 100, 100)}%`;
+  const comboEl = $('#lesson-combo');
+  if (comboEl) {
+    if (status.combo >= 2) {
+      comboEl.textContent = `🔥 连击 ×${status.combo}`;
+      comboEl.hidden = false;
+    } else {
+      comboEl.hidden = true;
+    }
+  }
   if (feedback && feedback.textContent !== status.feedback) {
     feedback.textContent = status.feedback;
     feedback.dataset.tone = status.complete ? 'success' : (status.wrongAttempts > 0 && status.index === 0 ? 'warn' : 'default');

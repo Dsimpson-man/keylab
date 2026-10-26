@@ -14,7 +14,7 @@ test('顺序任务：正确音符按顺序推进', () => {
   const result = matcher.accept(on(64));
   assert.equal(result.status, MATCH_STATUS.COMPLETE);
   assert.equal(result.complete, true);
-  assert.match(result.feedback, /完成/);
+  assert.match(result.feedback, /太棒了|完整弹出/);
 });
 
 test('顺序任务：弹错后重来并说明实际音', () => {
@@ -47,7 +47,7 @@ test('等待任务：完整完成', () => {
   matcher.accept(on(60));
   const result = matcher.accept(on(62));
   assert.equal(result.status, MATCH_STATUS.COMPLETE);
-  assert.match(result.feedback, /完成/);
+  assert.match(result.feedback, /太棒了|完整弹出/);
 });
 
 test('顺序任务：弹回第一个音时从第二步继续', () => {
@@ -56,6 +56,22 @@ test('顺序任务：弹回第一个音时从第二步继续', () => {
   const result = matcher.accept(on(60));
   assert.equal(result.status, MATCH_STATUS.RESTART);
   assert.equal(result.index, 1);
+});
+
+test('连击：连续正确累加，弹错归零', () => {
+  const matcher = createTaskMatcher({ mode: 'sequence', target: [60, 62, 64, 65] });
+  matcher.accept(on(60));
+  matcher.accept(on(62));
+  assert.equal(matcher.status().combo, 2, '连续两个正确，combo=2');
+  matcher.accept(on(99)); // 弹错
+  assert.equal(matcher.status().combo, 0, '弹错后 combo 归零');
+  assert.equal(matcher.status().maxCombo, 2, 'maxCombo 保留峰值');
+  matcher.accept(on(60)); // 重新开始
+  matcher.accept(on(62));
+  matcher.accept(on(64));
+  matcher.accept(on(65));
+  assert.equal(matcher.status().combo, 4);
+  assert.equal(matcher.status().maxCombo, 4);
 });
 
 test('一起按任务：全部按住才完成', () => {

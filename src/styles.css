@@ -429,6 +429,12 @@ code {
 .exercise-status { display: flex; align-items: center; gap: 9px; margin-top: 16px; }
 .exercise-counter { font: 11px var(--mono); color: var(--mint); }
 .exercise-progress { height: 4px; flex: 1; background: rgba(255, 255, 255, .16); border-radius: 9px; overflow: hidden; }
+.combo-badge {
+  font: 11px var(--mono); color: #f4e3b5; font-weight: 700;
+  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .18);
+  padding: 4px 10px; border-radius: 99px; white-space: nowrap; flex-shrink: 0;
+}
+.combo-badge[hidden] { display: none; }
 .exercise-progress span { display: block; height: 100%; width: 0; background: var(--mint); transition: width .2s; }
 .exercise-feedback { font-size: 11px; line-height: 1.75; color: #e08a68; margin-top: 12px; min-height: 20px; }
 .exercise-feedback[data-tone="success"] { color: var(--mint); font-weight: 600; }

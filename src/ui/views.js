@@ -211,6 +211,7 @@ export function renderLessonPage(state) {
           <div class="exercise-status">
             <span class="exercise-counter" id="lesson-exercise-counter">0/${targetCount}</span>
             <div class="exercise-progress"><span id="lesson-exercise-progress" style="width:0%"></span></div>
+            ${state.lessonStatus?.combo ? `<span class="combo-badge" id="lesson-combo">🔥 连击 ×${state.lessonStatus.combo}</span>` : ''}
           </div>
           <div class="exercise-feedback" id="lesson-exercise-feedback" data-tone="${state.lessonStatus?.complete ? 'success' : 'default'}" role="status" aria-live="polite">${escapeHtml(state.lessonStatus?.feedback || (isRhythm ? '点击「开始节拍器」，听预备拍后开始演奏。' : '准备好后，按提示弹奏第一个音。'))}</div>
           ${state.lessonStatus?.practiceReport ? `<div class="practice-report" role="status">${escapeHtml(describePractice(state.lessonStatus.practiceReport))}</div>` : ''}

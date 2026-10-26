@@ -11,7 +11,7 @@
  * - together：同时按住 target 中的全部音（不允许额外音）。
  */
 
-import { noteName, describePitchError, describeRelation } from './music-theory.js';
+import { noteName, describePitchError, describeRelation, friendlyPitchHint } from './music-theory.js';
 import { EVENT_TYPES } from '../midi/midi-normalizer.js';
 
 const STATUS = Object.freeze({
@@ -37,6 +37,8 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
   let feedback = '准备好后，按提示弹奏第一个音。';
   let lastEvent = null;
   let wrongAttempts = 0;
+  let combo = 0; // 连续正确按键数（弹错归零）
+  let maxCombo = 0;
 
   function names(list) {
     return list.map(note => noteName(note, { naming })).join('、');
@@ -48,6 +50,8 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
     complete = false;
     held = new Set();
     feedback = message;
+    combo = 0;
+    maxCombo = 0;
   }
 
   function onNoteOn(event) {
@@ -65,7 +69,7 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
       if (missing.length === 0 && held.size === target.length) {
         complete = true;
         index = target.length;
-        feedback = `完成！${names(target)} 同时响起，构成了目标和弦。`;
+        feedback = `漂亮！${names(target)} 同时响起，你弹出了一个和弦！`;
         return { status: STATUS.COMPLETE, feedback, index, total: target.length, complete: true, held: Array.from(held) };
       }
       const nextMissing = missing[0];
@@ -81,6 +85,8 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
     }
     const expected = target[index];
     if (note === expected) {
+      combo += 1;
+      maxCombo = Math.max(maxCombo, combo);
       index += 1;
       if (task.needsRelease && index >= target.length) {
         waitingForRelease = note;
@@ -89,29 +95,31 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
       }
       if (index >= target.length) {
         complete = true;
-        feedback = `完成！${names(target)} 的顺序正确。`;
+        feedback = `太棒了！你完整弹出了 ${names(target)}。`;
         return { status: STATUS.COMPLETE, feedback, index, total: target.length, complete: true };
       }
       const next = target[index];
-      feedback = `正确：${noteName(note, { naming })}。继续弹 ${noteName(next, { naming })}。`;
+      feedback = `对！${noteName(note, { naming })}。下一个：${noteName(next, { naming })}。`;
       return { status: STATUS.PROGRESS, feedback, index, total: target.length, complete: false };
     }
 
     wrongAttempts += 1;
+    combo = 0; // 弹错即断连击。
     const relation = describeRelation(expected, note, { naming });
     const errorText = describePitchError(note, expected, { naming });
+    const hint = friendlyPitchHint(note, expected, { naming });
     if (mode === 'wait') {
       // 曲目练习：弹错只提示实际音与目标音的关系，不重置进度，等弹对当前音再前进。
-      feedback = `${errorText} 保持当前位置，继续弹 ${noteName(expected, { naming })}。`;
+      feedback = `${hint} 保持当前位置，继续弹 ${noteName(expected, { naming })}。`;
       return { status: STATUS.WRONG, feedback, index, total: target.length, complete: false, relation };
     }
     if (note === target[0] && index > 0) {
       index = 1;
-      feedback = `${errorText} 已从 ${noteName(target[0], { naming })} 重新开始，继续弹 ${noteName(target[1], { naming })}。`;
+      feedback = `${hint} 已从 ${noteName(target[0], { naming })} 重新开始，继续弹 ${noteName(target[1], { naming })}。`;
       return { status: STATUS.RESTART, feedback, index, total: target.length, complete: false, relation };
     }
     index = 0;
-    feedback = `${errorText} 目标第一个音是 ${noteName(target[0], { naming })}。${relation.distance !== 0 ? relation.text : ''}`;
+    feedback = `${hint} 目标第一个音是 ${noteName(target[0], { naming })}。${relation.distance !== 0 ? relation.text : ''}`;
     return { status: STATUS.WRONG, feedback, index, total: target.length, complete: false, relation };
   }
 
@@ -158,6 +166,8 @@ export function createTaskMatcher(task, { naming = 'standard' } = {}) {
         complete,
         feedback,
         wrongAttempts,
+        combo,
+        maxCombo,
         waitingForRelease: waitingForRelease != null,
         held: Array.from(held),
         lastEvent

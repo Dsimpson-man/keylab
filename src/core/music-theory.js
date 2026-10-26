@@ -158,6 +158,26 @@ export function describePitchError(played, expected, { naming = 'standard' } = {
   return `你弹的是 ${playedName}，比目标 ${expectedName} ${direction} ${Math.abs(distance)} 个半音（${intervalName(distance)}）。`;
 }
 
+/**
+ * 零基础友好的音高引导（与 describePitchError 互补）。
+ *
+ * describePitchError 给「精确术语」（高 2 个半音），面向已经懂半音的学员；
+ * 本函数给「空间方向」（往左/往右），面向零基础——钢琴上音高是「左低右高」，
+ * 用方向比用「半音」更直观，不要求先懂术语。
+ */
+export function friendlyPitchHint(played, expected, { naming = 'standard' } = {}) {
+  const expectedName = noteName(expected, { naming });
+  if (!isValidMidiNote(played)) {
+    return `目标音是 ${expectedName}，在琴键上找找它。`;
+  }
+  const playedName = noteName(played, { naming });
+  const distance = intervalSemitones(played, expected);
+  if (distance === 0) return `你弹的是 ${playedName}，正是目标音！`;
+  const directionText = distance > 0 ? '往左找' : '往右找';
+  const distanceHint = Math.abs(distance) === 1 ? '只差一格，很接近了' : Math.abs(distance) <= 3 ? '离目标很近' : '回到目标附近再找';
+  return `你弹了 ${playedName}，目标是 ${expectedName}。${directionText}（${distanceHint}）。`;
+}
+
 export function scaleNotes(rootNote, steps = MAJOR_SCALE_STEPS) {
   if (!isValidMidiNote(rootNote)) return [];
   return steps
