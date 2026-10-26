@@ -1,6 +1,6 @@
 {
   "name": "keylab",
-  "version": "0.3.0-beta",
+  "version": "0.4.0-beta",
   "private": true,
   "type": "module",
   "description": "KeyLab：中文优先、免费开源、移动端优先的互动音乐与 MIDI 学习网站。",

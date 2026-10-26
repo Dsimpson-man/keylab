@@ -38,7 +38,7 @@ import { recordPieceRun } from './core/piece-mastery.js';
 import { KeyboardController } from './ui/keyboard.js';
 import { showToast, openModal, confirmDialog, closeModal, initModalBindings } from './ui/notify.js';
 
-const APP_VERSION = '0.3.0-beta';
+const APP_VERSION = '0.4.0-beta';
 
 const state = {
   currentView: 'home',
@@ -49,7 +49,7 @@ const state = {
   quizMatcher: null,
   quizFeedback: null,
   earSession: null,
-  practiceMode: false,
+  difficulty: 'bronze', // bronze(练习，弹错不重置) | silver(标准) | gold(挑战，一次通过)
   activeModule: null,
   lab: { filter: 'all', paused: false, expanded: new Set(), learnTarget: null },
   labMetronome: { running: false, beat: 0 }
@@ -235,7 +235,7 @@ function openLesson(id, { pushHash = true } = {}) {
   state.lessonId = lesson.id;
   state.lessonEngine = createLessonEngine({
     lesson,
-    forgiving: state.practiceMode,
+    forgiving: state.difficulty === 'bronze',
     onStatusChange: status => {
       state.lessonStatus = status;
       updateLessonUI();
@@ -269,8 +269,15 @@ function markLessonCompleted(lessonId) {
   renderLessonActions();
   updateLessonUI();
   if (firstTime) {
-    showToast(`🎉 你完成了「${lesson?.title || '课程'}」！${completionCheer(lesson)}`, { tone: 'success', duration: 3600 });
+    const goldMiss = state.difficulty === 'gold' && (state.lessonStatus?.wrongAttempts || 0) > 0;
+    const goldNote = goldMiss ? ' 黄金挑战未完美达成（有失误），可以再挑战一次。' : '';
+    showToast(`🎉 你完成了「${lesson?.title || '课程'}」！${completionCheer(lesson)}${goldNote}`, { tone: 'success', duration: 3600 });
   }
+}
+
+/** 三档难度标签。 */
+function difficultyLabel(difficulty) {
+  return { bronze: '青铜 · 练习', silver: '白银 · 标准', gold: '黄金 · 挑战' }[difficulty] || '白银 · 标准';
 }
 
 /** 完成课程时的「能力感」反馈：说出用户刚刚掌握的具体能力，而不是泛泛的「已完成」。 */
@@ -304,7 +311,7 @@ function renderLessonActions() {
   box.innerHTML = `
     ${complete ? `<span class="exercise-done">✓ 练习已通过${done ? ' · 进度已保存' : ''}</span>` : ''}
     <button class="btn btn-dark-ghost btn-small" data-action="reset-lesson">${complete ? '再练一次 ↻' : '重新开始 ↻'}</button>
-    <button class="btn btn-dark-ghost btn-small" data-action="toggle-practice-mode">${state.practiceMode ? '练习模式：开 ✓' : '练习模式'}</button>
+    <button class="btn btn-dark-ghost btn-small" data-action="cycle-difficulty">难度：${difficultyLabel(state.difficulty)}</button>
     ${complete && next ? `<button class="btn btn-primary btn-small" data-action="next-lesson" data-id="${next.id}">下一课 →</button>` : ''}
     ${complete && !next ? `<button class="btn btn-primary btn-small" data-view="courses">返回课程列表 →</button>` : ''}`;
 }
@@ -1005,12 +1012,19 @@ async function handleAction(button) {
       stopRhythm();
       render();
       break;
-    case 'toggle-practice-mode': {
-      state.practiceMode = !state.practiceMode;
+    case 'cycle-difficulty': {
+      const order = ['bronze', 'silver', 'gold'];
+      const idx = order.indexOf(state.difficulty);
+      state.difficulty = order[(idx + 1) % order.length];
       const lesson = findLesson(state.lessonId);
       if (lesson) openLesson(lesson.id, { pushHash: false });
       else render();
-      showToast(state.practiceMode ? '练习模式已开启：弹错不会从头开始，慢慢来。' : '练习模式已关闭。', { tone: 'success' });
+      const hint = state.difficulty === 'bronze'
+        ? '青铜：弹错不会从头开始，慢慢来。'
+        : state.difficulty === 'silver'
+          ? '白银：标准模式，弹错需重来。'
+          : '黄金：挑战模式，争取一次通过。';
+      showToast(`已切换到${difficultyLabel(state.difficulty)}。${hint}`, { tone: 'success' });
       break;
     }
     case 'start-quiz':
